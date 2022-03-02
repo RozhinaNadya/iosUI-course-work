@@ -11,16 +11,10 @@ class HabitsViewController: UIViewController {
     
     var backgroundColor: UIColor = .white
     
-    let newHabitsImageView: UIImageView = {
-        let newHabits = UIImageView(image: UIImage(systemName: "plus"))
-        newHabits.toAutoLayout()
-        return newHabits
-    }()
-    
-    init( color: UIColor, title: String = "Title") {
+    init( color: UIColor/*, title: String = "Title"*/) {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
-        self.title = title
+  //      self.title = title
     }
     
     override func loadView() {
@@ -32,13 +26,18 @@ class HabitsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         constraintsHabitsViewController()
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewHabit))
+    }
+    
+    @objc func addNewHabit() {
+        let newHabit = UINavigationController(rootViewController: HabitViewController(color: .white, title: "Создать"))
+        present(newHabit, animated: true)
     }
     
     func constraintsHabitsViewController() {
-        self.view.addSubview(newHabitsImageView)
+        //тут будет сабвью
         NSLayoutConstraint.activate([
-            newHabitsImageView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 44),
-            newHabitsImageView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5)
+// тут будет констраинт
         ])
     }
     
