@@ -27,12 +27,15 @@ class HabitViewController: UIViewController {
         let label = UILabel()
         label.toAutoLayout()
         label.text = "НАЗВАНИЕ"
+        label.font = .footnoteFont
         return label
     }()
     
     let titleHabitTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Бегать по утрам, спать 8 часов и т.п."
+        textField.textColor = .blue
+        textField.font = .bodyFont
         textField.toAutoLayout()
         return textField
     }()
@@ -41,6 +44,7 @@ class HabitViewController: UIViewController {
         let label = UILabel()
         label.toAutoLayout()
         label.text = "ЦВЕТ"
+        label.font = .footnoteFont
         return label
     }()
     
@@ -56,41 +60,45 @@ class HabitViewController: UIViewController {
         let label = UILabel()
         label.toAutoLayout()
         label.text = "ВРЕМЯ"
+        label.font = .footnoteFont
         return label
     }()
     
     let dataPickerLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.numberOfLines = 0
         label.text = "Каждый день в "
+        label.font = .bodyFont
         return label
     }()
     
     let txtDatePicker: UITextField = {
         let textDate = UITextField()
-  /*      let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy HH:mm"
-        textDate.text = formatter.string(from: datePicker.date)*/
+        textDate.textColor = UIColor(named: "AccentColor")
+        textDate.font = .bodyFont
+        textDate.toAutoLayout()
         return textDate
     }()
     
+    @objc func getDateFromPicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm a"
+        txtDatePicker.text = formatter.string(from: datePicker.date)
+    }
+    
+    @objc func doneAction(){
+        getDateFromPicker()
+    }
+    
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
-        picker.datePickerMode = .time
         picker.preferredDatePickerStyle = .wheels
-        picker.datePickerMode = .dateAndTime
         picker.minuteInterval = 1
+        picker.date = Date()
         picker.toAutoLayout()
         return picker
-    }()
-    
-    let timeTool: UIToolbar = {
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        let flexSpece = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let donebutton = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
-        toolbar.setItems([flexSpece, donebutton], animated: true)
-        return toolbar
     }()
     
     override func loadView() {
@@ -103,6 +111,12 @@ class HabitViewController: UIViewController {
         super.viewDidLoad()
         constraintsHabitViewController()
         colorButton.addTarget(self, action: #selector(TapSelectorColor), for: .touchUpInside)
+        txtDatePicker.inputView = datePicker
+        datePicker.datePickerMode = .time
+        getDateFromPicker()
+        datePicker.addTarget(self, action: #selector(getDateFromPicker), for: .allEvents)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelHabit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -129,7 +143,11 @@ class HabitViewController: UIViewController {
         present(colorPicer, animated: true)
     }
     
-    @objc func safeHabit(){
+    @objc func cancelHabit() {
+        self.presentingViewController?.dismiss(animated: true)
+    }
+    
+    @objc func safeHabit() {
         let newHabit = Habit(name: titleHabitTextField.text!,
                              date: Date(),
                              color: .systemRed)
@@ -137,18 +155,9 @@ class HabitViewController: UIViewController {
         store.habits.append(newHabit)
     }
     
-  /*  func createToolBar() -> UIToolbar {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
-        toolBar.setItems([doneButton], animated: true)
-        return toolBar
-    }*/
-    
-    
     func constraintsHabitViewController() {
         self.view.addSubview(habitScrollView)
-        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker])
+        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker, txtDatePicker])
         NSLayoutConstraint.activate([
             habitScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             habitScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -158,7 +167,7 @@ class HabitViewController: UIViewController {
             titleHabitLabel.topAnchor.constraint(equalTo: habitScrollView.topAnchor, constant: 21),
             titleHabitLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             titleHabitLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            titleHabitLabel.widthAnchor.constraint(equalToConstant: 100),
+            titleHabitLabel.widthAnchor.constraint(equalToConstant: 600),
             
             titleHabitTextField.topAnchor.constraint(equalTo: titleHabitLabel.bottomAnchor, constant: 7),
             titleHabitTextField.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
@@ -182,15 +191,17 @@ class HabitViewController: UIViewController {
             
             dataPickerLabel.topAnchor.constraint(equalTo: timeHabitLabel.bottomAnchor, constant: 15),
             dataPickerLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
-            dataPickerLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            dataPickerLabel.widthAnchor.constraint(equalToConstant: 100),
+       //     dataPickerLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor, constant: -100),
+            
+            txtDatePicker.topAnchor.constraint(equalTo: dataPickerLabel.topAnchor),
+            txtDatePicker.leadingAnchor.constraint(equalTo: dataPickerLabel.trailingAnchor),
+       //     txtDatePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
             
             datePicker.topAnchor.constraint(equalTo: dataPickerLabel.bottomAnchor, constant: 15),
             datePicker.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             datePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
             datePicker.widthAnchor.constraint(equalToConstant: 100),
             datePicker.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor)
-
         ])
     }
     

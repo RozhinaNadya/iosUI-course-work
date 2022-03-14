@@ -11,6 +11,12 @@ class HabitsViewController: UIViewController {
     
     var backgroundColor: UIColor = .white
     
+    let habitsTableView = UITableView.init(frame: .zero, style: .plain)
+    
+    var habitsData = HabitsStore.self
+    
+ //   let waterHabit = Habit(name: "Выпить стакан воды", date: 2022-01-31T02:22:40+00:00, trackDates: [], color: UIColor(red: 98, green: 54, blue: 255, alpha: 1))
+        
     init( color: UIColor/*, title: String = "Title"*/) {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
