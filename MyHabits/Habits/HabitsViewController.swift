@@ -11,13 +11,15 @@ class HabitsViewController: UIViewController {
     
     var backgroundColor: UIColor = .white
     
-    let habitsTableView = UITableView.init(frame: .zero, style: .plain)
+    let habitsTableView: UITableView = {
+        let tableView = UITableView.init(frame: .zero, style: .plain)
+        tableView.toAutoLayout()
+        return tableView
+    }()
     
     let HabitCell = "HebitTableViewCell"
-    
-    var habitsData: [Habit]!
-            
-    init( color: UIColor/*, title: String = "Title"*/) {
+                
+    init( color: UIColor) {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
     }
@@ -32,6 +34,10 @@ class HabitsViewController: UIViewController {
         super.viewDidLoad()
         constraintsHabitsViewController()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewHabit))
+        habitsTableView.register(HabitTableViewCell.self, forCellReuseIdentifier: HabitCell)
+        habitsTableView.dataSource = self
+        habitsTableView.rowHeight = UITableView.automaticDimension
+        habitsTableView.delegate = self
     }
     
     @objc func addNewHabit() {
@@ -57,18 +63,17 @@ class HabitsViewController: UIViewController {
 extension HabitsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        habitsData.count
+        HabitsStore.shared.habits.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: HabitCell, for: indexPath) as? HabitTableViewCell else { fatalError() }
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        let myHabit = habitsData[indexPath.row]
+        let myHabit = HabitsStore.shared.habits[indexPath.row]
         cell.habitNameLabel.text = "\(myHabit.name)"
         cell.targetTimeLabel.text = "\(myHabit.dateString)"
         cell.timerLabel.text = "Счётчик: \(myHabit.trackDates.count)"
-        cell.checkPointImageView.backgroundColor = myHabit.color
+        cell.checkPointImageView.layer.borderColor = myHabit.color.cgColor
+        cell.habitNameLabel.textColor = myHabit.color
         return cell
     }
     

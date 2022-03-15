@@ -148,11 +148,12 @@ class HabitViewController: UIViewController {
     }
     
     @objc func safeHabit() {
-        let newHabit = Habit(name: titleHabitTextField.text!,
-                             date: Date(),
-                             color: .systemRed)
+        let newHabit = Habit(name: titleHabitTextField.text ?? "No title",
+                             date: datePicker.date,
+                             color: colorButton.backgroundColor ?? .blue)
         let store = HabitsStore.shared
         store.habits.append(newHabit)
+        self.presentingViewController?.dismiss(animated: true)
     }
     
     func constraintsHabitViewController() {
@@ -191,11 +192,9 @@ class HabitViewController: UIViewController {
             
             dataPickerLabel.topAnchor.constraint(equalTo: timeHabitLabel.bottomAnchor, constant: 15),
             dataPickerLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
-       //     dataPickerLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor, constant: -100),
             
             txtDatePicker.topAnchor.constraint(equalTo: dataPickerLabel.topAnchor),
             txtDatePicker.leadingAnchor.constraint(equalTo: dataPickerLabel.trailingAnchor),
-       //     txtDatePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
             
             datePicker.topAnchor.constraint(equalTo: dataPickerLabel.bottomAnchor, constant: 15),
             datePicker.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),

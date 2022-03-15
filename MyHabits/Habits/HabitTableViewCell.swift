@@ -11,6 +11,7 @@ class HabitTableViewCell: UITableViewCell {
     
     var habitNameLabel: UILabel = {
         let label = UILabel()
+        label.font = .habitNameFont
         label.toAutoLayout()
         return label
     }()
@@ -31,18 +32,20 @@ class HabitTableViewCell: UITableViewCell {
     }()
     
     var checkPointImageView: UIImageView = {
-        let checkPoint = UIImageView(frame: .zero)
-        let checkPointColor = UIColor()
+        let checkPoint = UIImageView()
+        checkPoint.layer.cornerRadius = 19
+        checkPoint.layer.borderWidth = 1.5
         checkPoint.toAutoLayout()
         return checkPoint
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubviews([habitNameLabel, targetTimeLabel, timerLabel, checkPointImageView])
+        constraintsHabitViewCell()
     }
     
     func constraintsHabitViewCell() {
+        contentView.addSubviews([habitNameLabel, targetTimeLabel, timerLabel, checkPointImageView])
         NSLayoutConstraint.activate([
             habitNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             habitNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
@@ -55,7 +58,10 @@ class HabitTableViewCell: UITableViewCell {
             timerLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
             checkPointImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
-            checkPointImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+            checkPointImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            checkPointImageView.heightAnchor.constraint(equalToConstant: 38),
+            checkPointImageView.widthAnchor.constraint(equalToConstant: 38)
+
         ])
     }
     

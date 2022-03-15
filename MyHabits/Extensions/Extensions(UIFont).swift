@@ -28,4 +28,8 @@ extension UIFont {
     class var timerFont: UIFont {
         return UIFont.systemFont(ofSize: 13, weight: .regular)
     }
+    
+    class var habitNameFont: UIFont {
+        return UIFont.systemFont(ofSize: 17, weight: .semibold)
+    }
 }
