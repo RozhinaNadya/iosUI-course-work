@@ -13,14 +13,13 @@ class HabitsViewController: UIViewController {
     
     let habitsTableView = UITableView.init(frame: .zero, style: .plain)
     
-    var habitsData = HabitsStore.self
+    let HabitCell = "HebitTableViewCell"
     
- //   let waterHabit = Habit(name: "Выпить стакан воды", date: 2022-01-31T02:22:40+00:00, trackDates: [], color: UIColor(red: 98, green: 54, blue: 255, alpha: 1))
-        
+    var habitsData: [Habit]!
+            
     init( color: UIColor/*, title: String = "Title"*/) {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
-  //      self.title = title
     }
     
     override func loadView() {
@@ -41,13 +40,37 @@ class HabitsViewController: UIViewController {
     }
     
     func constraintsHabitsViewController() {
-        //тут будет сабвью
+        view.addSubview(habitsTableView)
         NSLayoutConstraint.activate([
-// тут будет констраинт
+            habitsTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            habitsTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            habitsTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            habitsTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension HabitsViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        habitsData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HabitCell, for: indexPath) as? HabitTableViewCell else { fatalError() }
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        let myHabit = habitsData[indexPath.row]
+        cell.habitNameLabel.text = "\(myHabit.name)"
+        cell.targetTimeLabel.text = "\(myHabit.dateString)"
+        cell.timerLabel.text = "Счётчик: \(myHabit.trackDates.count)"
+        cell.checkPointImageView.backgroundColor = myHabit.color
+        return cell
+    }
+    
+    
 }

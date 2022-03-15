@@ -19,6 +19,8 @@
 		842B583227C6B5F000F70B6C /* Extensions(UIView).swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B583127C6B5F000F70B6C /* Extensions(UIView).swift */; };
 		84A1889227C9263E00771B6C /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889127C9263E00771B6C /* HabitViewController.swift */; };
 		84A1889727DF94CC00771B6C /* Extensions(UIFont).swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */; };
+		84A1889A27DFB10D00771B6C /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889927DFB10D00771B6C /* HabitTableViewCell.swift */; };
+		84A1889C27DFB67000771B6C /* HabitStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889B27DFB67000771B6C /* HabitStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		842B583127C6B5F000F70B6C /* Extensions(UIView).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIView).swift"; sourceTree = "<group>"; };
 		84A1889127C9263E00771B6C /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIFont).swift"; sourceTree = "<group>"; };
+		84A1889927DFB10D00771B6C /* HabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTableViewCell.swift; sourceTree = "<group>"; };
+		84A1889B27DFB67000771B6C /* HabitStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +91,9 @@
 			children = (
 				842B582B27C5979A00F70B6C /* HabitsViewController.swift */,
 				84A1889127C9263E00771B6C /* HabitViewController.swift */,
+				84A1889927DFB10D00771B6C /* HabitTableViewCell.swift */,
 				842B582927C5968F00F70B6C /* HabitsStore.swift */,
+				84A1889B27DFB67000771B6C /* HabitStruct.swift */,
 			);
 			path = Habits;
 			sourceTree = "<group>";
@@ -171,6 +177,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84A1889A27DFB10D00771B6C /* HabitTableViewCell.swift in Sources */,
 				842B582A27C5968F00F70B6C /* HabitsStore.swift in Sources */,
 				84A1889727DF94CC00771B6C /* Extensions(UIFont).swift in Sources */,
 				842B581A27C58BEC00F70B6C /* ViewController.swift in Sources */,
@@ -179,6 +186,7 @@
 				842B583227C6B5F000F70B6C /* Extensions(UIView).swift in Sources */,
 				842B582E27C597B400F70B6C /* InfoViewController.swift in Sources */,
 				842B581827C58BEC00F70B6C /* SceneDelegate.swift in Sources */,
+				84A1889C27DFB67000771B6C /* HabitStruct.swift in Sources */,
 				84A1889227C9263E00771B6C /* HabitViewController.swift in Sources */,
 				842B583027C5A0DE00F70B6C /* TabBar.swift in Sources */,
 			);

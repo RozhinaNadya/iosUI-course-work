@@ -82,16 +82,6 @@ class HabitViewController: UIViewController {
         return textDate
     }()
     
-    @objc func getDateFromPicker() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm a"
-        txtDatePicker.text = formatter.string(from: datePicker.date)
-    }
-    
-    @objc func doneAction(){
-        getDateFromPicker()
-    }
-    
     let datePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.preferredDatePickerStyle = .wheels
@@ -100,6 +90,12 @@ class HabitViewController: UIViewController {
         picker.toAutoLayout()
         return picker
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
     
     override func loadView() {
         let view = UIView()
@@ -119,10 +115,14 @@ class HabitViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+    @objc func getDateFromPicker() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm a"
+        txtDatePicker.text = formatter.string(from: datePicker.date)
+    }
+    
+    @objc func doneAction(){
+        getDateFromPicker()
     }
     
     @objc func keyboardWillShow(notification: Notification) {

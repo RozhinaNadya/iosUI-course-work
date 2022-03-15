@@ -20,4 +20,12 @@ extension UIFont {
     class var titleFont: UIFont {
         return UIFont.systemFont(ofSize: 20, weight: .bold)
     }
+    
+    class var targetTimeFont: UIFont {
+        return UIFont.systemFont(ofSize: 12, weight: .regular)
+    }
+    
+    class var timerFont: UIFont {
+        return UIFont.systemFont(ofSize: 13, weight: .regular)
+    }
 }
