@@ -9,6 +9,15 @@ import UIKit
 
 class HabitTableViewCell: UITableViewCell {
     
+    let backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        view.toAutoLayout()
+        return view
+    }()
+    
     var habitNameLabel: UILabel = {
         let label = UILabel()
         label.font = .habitNameFont
@@ -27,6 +36,7 @@ class HabitTableViewCell: UITableViewCell {
     var timerLabel: UILabel = {
         let label = UILabel()
         label.font = .timerFont
+        label.textColor = .darkGray
         label.toAutoLayout()
         return label
     }()
@@ -42,23 +52,32 @@ class HabitTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         constraintsHabitViewCell()
+        contentView.backgroundColor = UIColor(named: "allBackgroundColor")
+
     }
     
     func constraintsHabitViewCell() {
-        contentView.addSubviews([habitNameLabel, targetTimeLabel, timerLabel, checkPointImageView])
+        contentView.addSubview(backView)
+        backView.addSubviews([habitNameLabel, targetTimeLabel, timerLabel, checkPointImageView])
         NSLayoutConstraint.activate([
-            habitNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
-            habitNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            
+            backView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+
+            habitNameLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 20),
+            habitNameLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
             
             targetTimeLabel.topAnchor.constraint(equalTo: habitNameLabel.bottomAnchor, constant: 4),
             targetTimeLabel.leadingAnchor.constraint(equalTo: habitNameLabel.leadingAnchor),
             
             timerLabel.topAnchor.constraint(equalTo: targetTimeLabel.bottomAnchor, constant: 30),
             timerLabel.leadingAnchor.constraint(equalTo: targetTimeLabel.leadingAnchor),
-            timerLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            timerLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -20),
             
-            checkPointImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25),
-            checkPointImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            checkPointImageView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -25),
+            checkPointImageView.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             checkPointImageView.heightAnchor.constraint(equalToConstant: 38),
             checkPointImageView.widthAnchor.constraint(equalToConstant: 38)
 

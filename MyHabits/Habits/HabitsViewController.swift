@@ -12,12 +12,14 @@ class HabitsViewController: UIViewController {
     var backgroundColor: UIColor = .white
     
     let habitsTableView: UITableView = {
-        let tableView = UITableView.init(frame: .zero, style: .plain)
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.backgroundColor = UIColor(named: "allBackgroundColor")
         tableView.toAutoLayout()
         return tableView
     }()
     
-    let HabitCell = "HebitTableViewCell"
+    let cellHabit = "HebitTableViewCell"
+    let cellProgress = "ProgressTableViewCell"
                 
     init( color: UIColor) {
         super.init(nibName: nil, bundle: nil)
@@ -34,10 +36,15 @@ class HabitsViewController: UIViewController {
         super.viewDidLoad()
         constraintsHabitsViewController()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewHabit))
-        habitsTableView.register(HabitTableViewCell.self, forCellReuseIdentifier: HabitCell)
+        habitsTableView.register(HabitTableViewCell.self, forCellReuseIdentifier: cellHabit)
+        habitsTableView.register(ProgressTableViewCell.self, forCellReuseIdentifier: cellProgress)
         habitsTableView.dataSource = self
         habitsTableView.rowHeight = UITableView.automaticDimension
         habitsTableView.delegate = self
+        self.view.backgroundColor = UIColor.white
+        self.navigationItem.title = "Сегодня"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.habitsTableView.separatorStyle = .none
     }
     
     @objc func addNewHabit() {
@@ -62,20 +69,32 @@ class HabitsViewController: UIViewController {
 
 extension HabitsViewController: UITableViewDataSource, UITableViewDelegate {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        HabitsStore.shared.habits.count
+        if section == 1 {
+            return HabitsStore.shared.habits.count
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HabitCell, for: indexPath) as? HabitTableViewCell else { fatalError() }
-        let myHabit = HabitsStore.shared.habits[indexPath.row]
-        cell.habitNameLabel.text = "\(myHabit.name)"
-        cell.targetTimeLabel.text = "\(myHabit.dateString)"
-        cell.timerLabel.text = "Счётчик: \(myHabit.trackDates.count)"
-        cell.checkPointImageView.layer.borderColor = myHabit.color.cgColor
-        cell.habitNameLabel.textColor = myHabit.color
-        return cell
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellProgress, for: indexPath) as? ProgressTableViewCell else { fatalError() }
+            return cell
+            
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellHabit, for: indexPath) as? HabitTableViewCell else { fatalError() }
+            let myHabit = HabitsStore.shared.habits[indexPath.row]
+            cell.habitNameLabel.text = "\(myHabit.name)"
+            cell.targetTimeLabel.text = "\(myHabit.dateString)"
+            cell.timerLabel.text = "Счётчик: \(myHabit.trackDates.count)"
+            cell.checkPointImageView.layer.borderColor = myHabit.color.cgColor
+            cell.habitNameLabel.textColor = myHabit.color
+            return cell
+        }
     }
-    
-    
 }
