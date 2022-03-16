@@ -9,6 +9,9 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
+    var habitForTap: Habit?
+    var delegate: HabitsViewControllerDelegate?
+    
     let backView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -43,8 +46,10 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     var checkPointImageView: UIImageView = {
         let checkPoint = UIImageView()
-        checkPoint.layer.cornerRadius = 19
- //       checkPoint.layer.borderWidth = 1.5
+        checkPoint.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
+        checkPoint.addGestureRecognizer(tapGestureRecognizer)
+  //      checkPoint.image = UIImage(systemName: "circle")
         checkPoint.toAutoLayout()
         return checkPoint
     }()
@@ -53,6 +58,25 @@ class HabitCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         constraintsHabitViewCell()
         contentView.backgroundColor = UIColor(named: "allBackgroundColor")
+    }
+    
+    func forColor(habit: Habit) {
+        if habit.isAlreadyTakenToday {
+                    checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
+            } else {
+                checkPointImageView.image = UIImage(systemName: "circle")
+            }
+    }
+    
+    @objc func didTapImageView() {
+   //     if habitForTap!.isAlreadyTakenToday {
+            HabitsStore.shared.track(habitForTap!)
+  //      }
+   /*     guard let habit = habitForTap else { return }
+
+        delegate?.imageTapped(habit: habit)*/
+ //       checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
+        
     }
     
     func constraintsHabitViewCell() {

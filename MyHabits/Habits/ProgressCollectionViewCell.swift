@@ -29,7 +29,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     
     let progressView: UIProgressView = {
         let progress = UIProgressView()
-  //      progress.progress = HabitsStore.shared.todayProgress
+        progress.progress = HabitsStore.shared.todayProgress
         progress.toAutoLayout()
         return progress
     }()

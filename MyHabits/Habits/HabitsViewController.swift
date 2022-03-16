@@ -64,6 +64,12 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func imageTapped(habit: Habit) {
+        if habit.isAlreadyTakenToday {
+            HabitsStore.shared.track(habit)
+        }
+    }
 }
 
 extension HabitsViewController {
@@ -87,12 +93,15 @@ extension HabitsViewController {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellHabit, for: indexPath) as? HabitCollectionViewCell else { fatalError() }
-            let myHabit = HabitsStore.shared.habits[indexPath.row]
+    //let myHabit = HabitsStore.shared.habits[indexPath.row]
+            let myHabit = HabitsStore.shared.habits[indexPath.item]
             cell.habitNameLabel.text = "\(myHabit.name)"
             cell.targetTimeLabel.text = "\(myHabit.dateString)"
             cell.timerLabel.text = "Счётчик: \(myHabit.trackDates.count)"
-            cell.checkPointImageView.backgroundColor = myHabit.color
+            cell.checkPointImageView.tintColor = myHabit.color
             cell.habitNameLabel.textColor = myHabit.color
+            cell.habitForTap = myHabit
+            cell.forColor(habit: myHabit)
             return cell
         }
     }
@@ -120,3 +129,13 @@ extension HabitsViewController {
         return UIEdgeInsets(top: 22, left: 6, bottom: 6, right: 6)
     }
 }
+/*
+extension HabitsViewController: HabitsViewControllerDelegate {
+    func imageTapped(habit: Habit) {
+
+            if habit.isAlreadyTakenToday {
+                HabitsStore.shared.track(habit)
+            }
+        
+    }
+}*/
