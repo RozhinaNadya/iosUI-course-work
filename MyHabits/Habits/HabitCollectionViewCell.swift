@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitTableViewCell: UITableViewCell {
+class HabitCollectionViewCell: UICollectionViewCell {
     
     let backView: UIView = {
         let view = UIView()
@@ -44,16 +44,15 @@ class HabitTableViewCell: UITableViewCell {
     var checkPointImageView: UIImageView = {
         let checkPoint = UIImageView()
         checkPoint.layer.cornerRadius = 19
-        checkPoint.layer.borderWidth = 1.5
+ //       checkPoint.layer.borderWidth = 1.5
         checkPoint.toAutoLayout()
         return checkPoint
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         constraintsHabitViewCell()
         contentView.backgroundColor = UIColor(named: "allBackgroundColor")
-
     }
     
     func constraintsHabitViewCell() {
@@ -62,9 +61,9 @@ class HabitTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             
             backView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
+            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
             habitNameLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 20),
             habitNameLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),

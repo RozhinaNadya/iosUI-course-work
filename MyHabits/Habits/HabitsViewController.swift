@@ -7,19 +7,19 @@
 
 import UIKit
 
-class HabitsViewController: UIViewController {
+class HabitsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var backgroundColor: UIColor = .white
     
-    let habitsTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
-        tableView.backgroundColor = UIColor(named: "allBackgroundColor")
-        tableView.toAutoLayout()
-        return tableView
+    let habitsCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.backgroundColor = UIColor(named: "allBackgroundColor")
+        collectionView.toAutoLayout()
+        return collectionView
     }()
     
-    let cellHabit = "HebitTableViewCell"
-    let cellProgress = "ProgressTableViewCell"
+    let cellHabit = "HebitCollectionViewCell"
+    let cellProgress = "ProgressCollectionViewCell"
                 
     init( color: UIColor) {
         super.init(nibName: nil, bundle: nil)
@@ -36,15 +36,14 @@ class HabitsViewController: UIViewController {
         super.viewDidLoad()
         constraintsHabitsViewController()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(addNewHabit))
-        habitsTableView.register(HabitTableViewCell.self, forCellReuseIdentifier: cellHabit)
-        habitsTableView.register(ProgressTableViewCell.self, forCellReuseIdentifier: cellProgress)
-        habitsTableView.dataSource = self
-        habitsTableView.rowHeight = UITableView.automaticDimension
-        habitsTableView.delegate = self
+        habitsCollectionView.register(HabitCollectionViewCell.self, forCellWithReuseIdentifier: cellHabit)
+        habitsCollectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: cellProgress)
+        habitsCollectionView.dataSource = self
+        habitsCollectionView.delegate = self
         self.view.backgroundColor = UIColor.white
         self.navigationItem.title = "Сегодня"
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.habitsTableView.separatorStyle = .none
+ //       self.habitsTableView.separatorStyle = .none
     }
     
     @objc func addNewHabit() {
@@ -53,12 +52,12 @@ class HabitsViewController: UIViewController {
     }
     
     func constraintsHabitsViewController() {
-        view.addSubview(habitsTableView)
+        view.addSubview(habitsCollectionView)
         NSLayoutConstraint.activate([
-            habitsTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            habitsTableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            habitsTableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            habitsTableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            habitsCollectionView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            habitsCollectionView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            habitsCollectionView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            habitsCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
@@ -67,13 +66,13 @@ class HabitsViewController: UIViewController {
     }
 }
 
-extension HabitsViewController: UITableViewDataSource, UITableViewDelegate {
+extension HabitsViewController {
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        2
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 1 {
             return HabitsStore.shared.habits.count
         } else {
@@ -81,20 +80,43 @@ extension HabitsViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellProgress, for: indexPath) as? ProgressTableViewCell else { fatalError() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellProgress, for: indexPath) as? ProgressCollectionViewCell else { fatalError() }
+            cell.progressView.progress = HabitsStore.shared.todayProgress
             return cell
-            
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: cellHabit, for: indexPath) as? HabitTableViewCell else { fatalError() }
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellHabit, for: indexPath) as? HabitCollectionViewCell else { fatalError() }
             let myHabit = HabitsStore.shared.habits[indexPath.row]
             cell.habitNameLabel.text = "\(myHabit.name)"
             cell.targetTimeLabel.text = "\(myHabit.dateString)"
             cell.timerLabel.text = "Счётчик: \(myHabit.trackDates.count)"
-            cell.checkPointImageView.layer.borderColor = myHabit.color.cgColor
+            cell.checkPointImageView.backgroundColor = myHabit.color
             cell.habitNameLabel.textColor = myHabit.color
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            return CGSize(width: collectionView.bounds.width - 32, height: 60)
+        } else {
+            return CGSize(width: collectionView.bounds.width - 32, height: 130)
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 22, left: 6, bottom: 6, right: 6)
     }
 }

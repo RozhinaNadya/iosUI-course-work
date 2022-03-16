@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProgressTableViewCell: UITableViewCell {
+class ProgressCollectionViewCell: UICollectionViewCell {
     
     let backView: UIView = {
         let view = UIView()
@@ -29,25 +29,35 @@ class ProgressTableViewCell: UITableViewCell {
     
     let progressView: UIProgressView = {
         let progress = UIProgressView()
+  //      progress.progress = HabitsStore.shared.todayProgress
         progress.toAutoLayout()
         return progress
     }()
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    let progressProcentLabel: UILabel = {
+        let label = UILabel()
+        label.font = .footnoteFont
+        label.textColor = .darkGray
+        label.toAutoLayout()
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         constraintsProgressViewCell()
         contentView.backgroundColor = UIColor(named: "allBackgroundColor")
+        progressProcentLabel.text = "\(toProcent(progress: progressView.progress))%"
     }
     
     func constraintsProgressViewCell() {
         contentView.addSubview(backView)
-        backView.addSubviews([titleProgressLabel, progressView])
+        backView.addSubviews([titleProgressLabel, progressView, progressProcentLabel])
         NSLayoutConstraint.activate([
             
-            backView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22),
-            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -18),
+            backView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             
             titleProgressLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 10),
             titleProgressLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 12),
@@ -55,8 +65,16 @@ class ProgressTableViewCell: UITableViewCell {
             progressView.topAnchor.constraint(equalTo: titleProgressLabel.bottomAnchor, constant: 10),
             progressView.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 12),
             progressView.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -12),
-            progressView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -15)
+            progressView.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -15),
+            
+            progressProcentLabel.topAnchor.constraint(equalTo: titleProgressLabel.topAnchor),
+            progressProcentLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -12)
+
         ])
+    }
+    
+    func toProcent(progress: Float) -> Int {
+        return Int(progress * 100)
     }
     
     required init?(coder: NSCoder) {

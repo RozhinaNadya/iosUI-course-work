@@ -19,8 +19,8 @@
 		842B583227C6B5F000F70B6C /* Extensions(UIView).swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B583127C6B5F000F70B6C /* Extensions(UIView).swift */; };
 		84A1889227C9263E00771B6C /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889127C9263E00771B6C /* HabitViewController.swift */; };
 		84A1889727DF94CC00771B6C /* Extensions(UIFont).swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */; };
-		84A1889A27DFB10D00771B6C /* HabitTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889927DFB10D00771B6C /* HabitTableViewCell.swift */; };
-		84A1889E27E0A70400771B6C /* ProgressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889D27E0A70400771B6C /* ProgressTableViewCell.swift */; };
+		84A1889A27DFB10D00771B6C /* HabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */; };
+		84A1889E27E0A70400771B6C /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +38,8 @@
 		842B583127C6B5F000F70B6C /* Extensions(UIView).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIView).swift"; sourceTree = "<group>"; };
 		84A1889127C9263E00771B6C /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIFont).swift"; sourceTree = "<group>"; };
-		84A1889927DFB10D00771B6C /* HabitTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitTableViewCell.swift; sourceTree = "<group>"; };
-		84A1889D27E0A70400771B6C /* ProgressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableViewCell.swift; sourceTree = "<group>"; };
+		84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCollectionViewCell.swift; sourceTree = "<group>"; };
+		84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,8 +91,8 @@
 			children = (
 				842B582B27C5979A00F70B6C /* HabitsViewController.swift */,
 				84A1889127C9263E00771B6C /* HabitViewController.swift */,
-				84A1889927DFB10D00771B6C /* HabitTableViewCell.swift */,
-				84A1889D27E0A70400771B6C /* ProgressTableViewCell.swift */,
+				84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */,
+				84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */,
 				842B582927C5968F00F70B6C /* HabitsStore.swift */,
 			);
 			path = Habits;
@@ -177,9 +177,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A1889A27DFB10D00771B6C /* HabitTableViewCell.swift in Sources */,
+				84A1889A27DFB10D00771B6C /* HabitCollectionViewCell.swift in Sources */,
 				842B582A27C5968F00F70B6C /* HabitsStore.swift in Sources */,
-				84A1889E27E0A70400771B6C /* ProgressTableViewCell.swift in Sources */,
+				84A1889E27E0A70400771B6C /* ProgressCollectionViewCell.swift in Sources */,
 				84A1889727DF94CC00771B6C /* Extensions(UIFont).swift in Sources */,
 				842B581A27C58BEC00F70B6C /* ViewController.swift in Sources */,
 				842B581627C58BEC00F70B6C /* AppDelegate.swift in Sources */,
