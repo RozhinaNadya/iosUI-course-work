@@ -65,11 +65,11 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         fatalError("init(coder:) has not been implemented")
     }
     
-    func imageTapped(habit: Habit) {
+    /*   func imageTapped(habit: Habit) {
         if habit.isAlreadyTakenToday {
             HabitsStore.shared.track(habit)
         }
-    }
+    }*/
 }
 
 extension HabitsViewController {
@@ -93,7 +93,7 @@ extension HabitsViewController {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellHabit, for: indexPath) as? HabitCollectionViewCell else { fatalError() }
-    //let myHabit = HabitsStore.shared.habits[indexPath.row]
+  //  let myHabit = HabitsStore.shared.habits[indexPath.row]
             let myHabit = HabitsStore.shared.habits[indexPath.item]
             cell.habitNameLabel.text = "\(myHabit.name)"
             cell.targetTimeLabel.text = "\(myHabit.dateString)"
@@ -104,6 +104,12 @@ extension HabitsViewController {
             cell.forColor(habit: myHabit)
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name)
+        navigationController?.pushViewController(detailsViewController, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView,

@@ -75,7 +75,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
    /*     guard let habit = habitForTap else { return }
 
         delegate?.imageTapped(habit: habit)*/
- //       checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
+   //     checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
         
     }
     

@@ -22,6 +22,8 @@
 		84A1889727DF94CC00771B6C /* Extensions(UIFont).swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */; };
 		84A1889A27DFB10D00771B6C /* HabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */; };
 		84A1889E27E0A70400771B6C /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */; };
+		84F2CE5327E36ACC00677DCA /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2CE5227E36ACC00677DCA /* HabitDetailsViewController.swift */; };
+		84F2CE5527E36E4500677DCA /* HabitDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2CE5427E36E4500677DCA /* HabitDetailsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIFont).swift"; sourceTree = "<group>"; };
 		84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCollectionViewCell.swift; sourceTree = "<group>"; };
 		84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
+		84F2CE5227E36ACC00677DCA /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
+		84F2CE5427E36E4500677DCA /* HabitDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 				84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */,
 				842B582927C5968F00F70B6C /* HabitsStore.swift */,
 				8442078327E214360050EAA7 /* HabitsViewControllerDelegate.swift */,
+				84F2CE5627E36E4F00677DCA /* Details */,
 			);
 			path = Habits;
 			sourceTree = "<group>";
@@ -108,6 +113,15 @@
 				84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		84F2CE5627E36E4F00677DCA /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				84F2CE5227E36ACC00677DCA /* HabitDetailsViewController.swift */,
+				84F2CE5427E36E4500677DCA /* HabitDetailsTableViewCell.swift */,
+			);
+			path = Details;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,8 +202,10 @@
 				8442078427E214370050EAA7 /* HabitsViewControllerDelegate.swift in Sources */,
 				842B581627C58BEC00F70B6C /* AppDelegate.swift in Sources */,
 				842B582C27C5979A00F70B6C /* HabitsViewController.swift in Sources */,
+				84F2CE5527E36E4500677DCA /* HabitDetailsTableViewCell.swift in Sources */,
 				842B583227C6B5F000F70B6C /* Extensions(UIView).swift in Sources */,
 				842B582E27C597B400F70B6C /* InfoViewController.swift in Sources */,
+				84F2CE5327E36ACC00677DCA /* HabitDetailsViewController.swift in Sources */,
 				842B581827C58BEC00F70B6C /* SceneDelegate.swift in Sources */,
 				84A1889227C9263E00771B6C /* HabitViewController.swift in Sources */,
 				842B583027C5A0DE00F70B6C /* TabBar.swift in Sources */,
