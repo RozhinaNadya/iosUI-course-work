@@ -107,7 +107,8 @@ extension HabitsViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name)
+        let detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name, habitForEdit: HabitsStore.shared.habits[indexPath.item])
+        
         navigationController?.pushViewController(detailsViewController, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
     }

@@ -9,6 +9,8 @@ import UIKit
 
 class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    var habitForEdit: Habit
+    
     var detailsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.backgroundColor = UIColor(named: "allBackgroundColor")
@@ -18,7 +20,8 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     let cellDetails = "DetailsTableViewCell"
     
-    init(title: String = "Title") {
+    init(title: String = "Title", habitForEdit: Habit) {
+        self.habitForEdit = habitForEdit
         super.init(nibName: nil, bundle: nil)
         self.title = title
     }
@@ -29,7 +32,6 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         detailsTableView.dataSource = self
         detailsTableView.delegate = self
         constraintsDetailsViewContriller()
-   //     self.navigationController?.navigationBar.isHidden = false
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(editHabit))
@@ -46,7 +48,11 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @objc func editHabit() {
-        
+        let editHabit = HabitViewController(color: .white, title: "Править")
+        editHabit.titleHabitTextField.text = habitForEdit.name
+        editHabit.colorButton.backgroundColor = habitForEdit.color
+        editHabit.datePicker.date = habitForEdit.date
+        navigationController?.pushViewController(editHabit, animated: true)
     }
     
     required init?(coder: NSCoder) {

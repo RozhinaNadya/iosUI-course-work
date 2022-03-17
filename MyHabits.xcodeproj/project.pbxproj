@@ -24,6 +24,7 @@
 		84A1889E27E0A70400771B6C /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */; };
 		84F2CE5327E36ACC00677DCA /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2CE5227E36ACC00677DCA /* HabitDetailsViewController.swift */; };
 		84F2CE5527E36E4500677DCA /* HabitDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2CE5427E36E4500677DCA /* HabitDetailsTableViewCell.swift */; };
+		84F2CE5827E3987900677DCA /* Extensions(UIViewController).swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F2CE5727E3987900677DCA /* Extensions(UIViewController).swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		84F2CE5227E36ACC00677DCA /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		84F2CE5427E36E4500677DCA /* HabitDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		84F2CE5727E3987900677DCA /* Extensions(UIViewController).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIViewController).swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			children = (
 				842B583127C6B5F000F70B6C /* Extensions(UIView).swift */,
 				84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */,
+				84F2CE5727E3987900677DCA /* Extensions(UIViewController).swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -201,6 +204,7 @@
 				842B581A27C58BEC00F70B6C /* ViewController.swift in Sources */,
 				8442078427E214370050EAA7 /* HabitsViewControllerDelegate.swift in Sources */,
 				842B581627C58BEC00F70B6C /* AppDelegate.swift in Sources */,
+				84F2CE5827E3987900677DCA /* Extensions(UIViewController).swift in Sources */,
 				842B582C27C5979A00F70B6C /* HabitsViewController.swift in Sources */,
 				84F2CE5527E36E4500677DCA /* HabitDetailsTableViewCell.swift in Sources */,
 				842B583227C6B5F000F70B6C /* Extensions(UIView).swift in Sources */,

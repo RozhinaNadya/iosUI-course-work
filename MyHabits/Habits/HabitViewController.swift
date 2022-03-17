@@ -11,7 +11,7 @@ class HabitViewController: UIViewController {
     
     var backgroundColor: UIColor = .white
     
-    init( color: UIColor, title: String = "Создать") {
+    init( color: UIColor, title: String = "Title") {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
         self.title = title
@@ -143,9 +143,9 @@ class HabitViewController: UIViewController {
         present(colorPicer, animated: true)
     }
     
-    @objc func cancelHabit() {
+ /*   @objc func cancelHabit() {
         self.presentingViewController?.dismiss(animated: true)
-    }
+    }*/
     
     @objc func safeHabit() {
         let newHabit = Habit(name: titleHabitTextField.text ?? "No title",
