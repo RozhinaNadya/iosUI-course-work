@@ -50,23 +50,9 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     @objc func editHabit() {
         let editHabit = HabitViewController(color: .white, title: "Править")
         editHabit.thisHabit(habit: habitForEdit)
-        editHabit.deliteHabitButton.isHidden = false
+        editHabit.deleteHabitButton.isHidden = false
         navigationController?.pushViewController(editHabit, animated: true)
     }
-    
-/*    @objc func cancelHabit() {
-        print("close close close")
-   //     self.presentingViewController?.dismiss(animated: true)
-        self.dismiss(animated: true, completion: nil)
-    }*/
-    
-/*    @objc func safeHabit() {
-        print("safeEdit safeEdit")
-        let newHabit = habitForEdit
-        let store = HabitsStore.shared
-        store.habits.append(newHabit)
-        navigationController?.popToRootViewController(animated: true)
-    }*/
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

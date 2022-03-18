@@ -54,6 +54,7 @@ class HabitViewController: UIViewController {
         let button = UIButton()
         button.layer.cornerRadius = 15
         button.backgroundColor = .blue
+        button.addTarget(self, action: #selector(TapSelectorColor), for: .touchUpInside)
         button.toAutoLayout()
         return button
     }()
@@ -89,17 +90,19 @@ class HabitViewController: UIViewController {
         picker.preferredDatePickerStyle = .wheels
         picker.minuteInterval = 1
         picker.date = Date()
+        picker.addTarget(self, action: #selector(getDateFromPicker), for: .allEvents)
         picker.toAutoLayout()
         return picker
     }()
     
-    let deliteHabitButton: UIButton = {
+    let deleteHabitButton: UIButton = {
         let button = UIButton()
         button.toAutoLayout()
-        button.titleLabel?.text = "Удалить привычку"
-        button.tintColor = .red
-        button.backgroundColor = .white
-    //    button.isHidden = true
+        button.setTitle("Удалить привычку", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.titleLabel?.font = .bodyFont
+        button.addTarget(self, action: #selector(deleteHabit), for: .touchUpInside)
+        button.isHidden = true
         return button
     }()
     
@@ -118,14 +121,11 @@ class HabitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         constraintsHabitViewController()
-        colorButton.addTarget(self, action: #selector(TapSelectorColor), for: .touchUpInside)
         txtDatePicker.inputView = datePicker
         datePicker.datePickerMode = .time
         getDateFromPicker()
-        datePicker.addTarget(self, action: #selector(getDateFromPicker), for: .allEvents)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelHabit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
-        deliteHabitButton.isHidden = true
     }
     
     @objc func getDateFromPicker() {
@@ -176,10 +176,24 @@ class HabitViewController: UIViewController {
         let newHabit = Habit(name: titleHabitTextField.text ?? "No title",
                              date: datePicker.date,
                              color: colorButton.backgroundColor ?? .blue)
-        let store = HabitsStore.shared
-        store.habits.append(newHabit)
+        HabitsStore.shared.habits.append(newHabit)
             self.dismiss(animated: true, completion: nil)
         }
+    }
+    
+    @objc func deleteHabit() {
+        print("delete delete")
+        let alert = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку \(titleHabitTextField.text ?? "No title")?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: {alert -> Void in
+            HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.habit!)!)
+            HabitsStore.shared.save()
+            self.navigationController?.popToRootViewController(animated: true)
+
+        }))
+  //      alert.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil)
+ //       alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { _ in NSLog("The \"Удалить\" alert occured.")}))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func thisHabit(habit: Habit) {
@@ -191,7 +205,7 @@ class HabitViewController: UIViewController {
     
     func constraintsHabitViewController() {
         self.view.addSubview(habitScrollView)
-        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker, txtDatePicker, deliteHabitButton])
+        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker, txtDatePicker, deleteHabitButton])
         NSLayoutConstraint.activate([
             habitScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             habitScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -233,11 +247,11 @@ class HabitViewController: UIViewController {
             datePicker.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             datePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
             datePicker.widthAnchor.constraint(equalToConstant: 100),
-    //        datePicker.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor)
-            
-            deliteHabitButton.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
-            deliteHabitButton.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            deliteHabitButton.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor, constant: -18),
+            datePicker.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor, constant: -219),
+
+            deleteHabitButton.centerXAnchor.constraint(equalTo: habitScrollView.centerXAnchor),
+            deleteHabitButton.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor),
+            deleteHabitButton.heightAnchor.constraint(equalToConstant: 22),
         ])
     }
     
