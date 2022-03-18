@@ -12,7 +12,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     var habitForEdit: Habit
     
     var detailsTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .plain)
+        let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.backgroundColor = UIColor(named: "allBackgroundColor")
         tableView.toAutoLayout()
         return tableView

@@ -129,12 +129,14 @@ extension HabitsViewController {
     }
 }
 
-extension HabitsViewController: HabitsViewControllerDelegate {
+/*extension HabitsViewController: HabitsViewControllerDelegate {
     func imageTapped(habit: Habit) {
 
-            if habit.isAlreadyTakenToday {
-                HabitsStore.shared.track(habit)
+        if !habit.isAlreadyTakenToday {
+            HabitsStore.shared.track(habit)
+            
+            habitsCollectionView.reloadData()
             }
         
     }
-}
+}*/

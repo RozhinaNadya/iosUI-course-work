@@ -10,7 +10,6 @@ import UIKit
 class HabitCollectionViewCell: UICollectionViewCell {
     
     var habitForTap: Habit?
-    var delegate: HabitsViewControllerDelegate?
     
     let backView: UIView = {
         let view = UIView()
@@ -46,10 +45,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     var checkPointImageView: UIImageView = {
         let checkPoint = UIImageView()
-        checkPoint.isUserInteractionEnabled = true
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
-        checkPoint.addGestureRecognizer(tapGestureRecognizer)
-  //      checkPoint.image = UIImage(systemName: "circle")
         checkPoint.toAutoLayout()
         return checkPoint
     }()
@@ -58,6 +53,10 @@ class HabitCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         constraintsHabitViewCell()
         contentView.backgroundColor = UIColor(named: "allBackgroundColor")
+        checkPointImageView.isUserInteractionEnabled = true
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
+        checkPointImageView.addGestureRecognizer(tapGestureRecognizer)
+
     }
     
     func forColor(habit: Habit) {
@@ -69,14 +68,12 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func didTapImageView() {
-        guard let habit = habitForTap else { return }
-        delegate?.imageTapped(habit: habit)
-        
-        // второй вариант:
-        //     if habitForTap!.isAlreadyTakenToday {
-        //         HabitsStore.shared.track(habitForTap!)
-       //      }
-        
+        print("tap buttonColor")
+             if habitForTap!.isAlreadyTakenToday {
+                 return
+             } else {
+                 HabitsStore.shared.track(habitForTap!)
+             }
     }
     
     func constraintsHabitViewCell() {
