@@ -11,6 +11,8 @@ class HabitViewController: UIViewController {
     
     var backgroundColor: UIColor = .white
     
+    var habit: Habit?
+    
     init( color: UIColor, title: String = "Title") {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
@@ -91,6 +93,16 @@ class HabitViewController: UIViewController {
         return picker
     }()
     
+    let deliteHabitButton: UIButton = {
+        let button = UIButton()
+        button.toAutoLayout()
+        button.titleLabel?.text = "Удалить привычку"
+        button.tintColor = .red
+        button.backgroundColor = .white
+    //    button.isHidden = true
+        return button
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -113,6 +125,7 @@ class HabitViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(getDateFromPicker), for: .allEvents)
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelHabit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
+        deliteHabitButton.isHidden = true
     }
     
     @objc func getDateFromPicker() {
@@ -143,22 +156,42 @@ class HabitViewController: UIViewController {
         present(colorPicer, animated: true)
     }
     
- /*   @objc func cancelHabit() {
-        self.presentingViewController?.dismiss(animated: true)
-    }*/
+    @objc func cancelHabit() {
+        print("close close close")
+        self.dismiss(animated: true, completion: nil)
+        navigationController?.popToRootViewController(animated: true)
+    }
     
     @objc func safeHabit() {
+        print("safe safe safe")
+                
+        if let habit = habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {
+            HabitsStore.shared.habits[indexHabit].name = titleHabitTextField.text ?? "No title"
+            HabitsStore.shared.habits[indexHabit].date = datePicker.date
+            HabitsStore.shared.habits[indexHabit].color = colorButton.backgroundColor ?? .blue
+            HabitsStore.shared.save()
+            navigationController?.popToRootViewController(animated: true)
+
+        } else {
         let newHabit = Habit(name: titleHabitTextField.text ?? "No title",
                              date: datePicker.date,
                              color: colorButton.backgroundColor ?? .blue)
         let store = HabitsStore.shared
         store.habits.append(newHabit)
-        self.presentingViewController?.dismiss(animated: true)
+            self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func thisHabit(habit: Habit) {
+        self.habit = habit
+        titleHabitTextField.text = habit.name
+        datePicker.date = habit.date
+        colorButton.backgroundColor = habit.color
     }
     
     func constraintsHabitViewController() {
         self.view.addSubview(habitScrollView)
-        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker, txtDatePicker])
+        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker, txtDatePicker, deliteHabitButton])
         NSLayoutConstraint.activate([
             habitScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             habitScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -200,7 +233,11 @@ class HabitViewController: UIViewController {
             datePicker.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             datePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
             datePicker.widthAnchor.constraint(equalToConstant: 100),
-            datePicker.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor)
+    //        datePicker.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor)
+            
+            deliteHabitButton.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
+            deliteHabitButton.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
+            deliteHabitButton.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor, constant: -18),
         ])
     }
     

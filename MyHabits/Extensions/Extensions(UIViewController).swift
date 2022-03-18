@@ -9,8 +9,9 @@ import UIKit
 
 extension UIViewController {
     
-    @objc func cancelHabit() {
-        self.presentingViewController?.dismiss(animated: true)
-    }
+/*    @objc func cancelHabit() {
+        print("close close close")
+        self.dismiss(animated: true, completion: nil)
+    }*/
     
 }
