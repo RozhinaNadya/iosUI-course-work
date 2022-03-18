@@ -22,7 +22,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         let title = UILabel()
         title.font = .footnoteFont
         title.textColor = .darkGray
-        title.text = "Всё получится!"
+ //       title.text = "Всё получится!"
         title.toAutoLayout()
         return title
     }()
@@ -47,6 +47,15 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         constraintsProgressViewCell()
         contentView.backgroundColor = UIColor(named: "allBackgroundColor")
         progressProcentLabel.text = "\(toProcent(progress: progressView.progress))%"
+        progressText()
+    }
+    
+    func progressText() {
+        if toProcent(progress: progressView.progress) == 100 {
+            titleProgressLabel.text = "Супер! Сегодня всё выполнено"
+        } else {
+            titleProgressLabel.text = "Всё получится!"
+        }
     }
     
     func constraintsProgressViewCell() {

@@ -191,8 +191,7 @@ class HabitViewController: UIViewController {
             self.navigationController?.popToRootViewController(animated: true)
 
         }))
-  //      alert.addAction(UIAlertAction(title: "Отмена", style: .default, handler: nil)
- //       alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: { _ in NSLog("The \"Удалить\" alert occured.")}))
+
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -215,17 +214,18 @@ class HabitViewController: UIViewController {
             titleHabitLabel.topAnchor.constraint(equalTo: habitScrollView.topAnchor, constant: 21),
             titleHabitLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             titleHabitLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            titleHabitLabel.widthAnchor.constraint(equalToConstant: 600),
+  //          titleHabitLabel.widthAnchor.constraint(equalToConstant: 600),
             
             titleHabitTextField.topAnchor.constraint(equalTo: titleHabitLabel.bottomAnchor, constant: 7),
             titleHabitTextField.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             titleHabitTextField.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            titleHabitTextField.widthAnchor.constraint(equalTo: habitScrollView.widthAnchor),
+  //          titleHabitTextField.widthAnchor.constraint(equalToConstant: 600),
+
             
             colorHabitLabel.topAnchor.constraint(equalTo: titleHabitTextField.bottomAnchor, constant: 15),
             colorHabitLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             colorHabitLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            colorHabitLabel.widthAnchor.constraint(equalToConstant: 100),
+    //        colorHabitLabel.widthAnchor.constraint(equalToConstant: 100),
             
             colorButton.topAnchor.constraint(equalTo: colorHabitLabel.bottomAnchor, constant: 7),
             colorButton.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
@@ -235,7 +235,7 @@ class HabitViewController: UIViewController {
             timeHabitLabel.topAnchor.constraint(equalTo: colorButton.bottomAnchor, constant: 15),
             timeHabitLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             timeHabitLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            timeHabitLabel.widthAnchor.constraint(equalToConstant: 100),
+ //           timeHabitLabel.widthAnchor.constraint(equalToConstant: 100),
             
             dataPickerLabel.topAnchor.constraint(equalTo: timeHabitLabel.bottomAnchor, constant: 15),
             dataPickerLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
@@ -244,9 +244,10 @@ class HabitViewController: UIViewController {
             txtDatePicker.leadingAnchor.constraint(equalTo: dataPickerLabel.trailingAnchor),
             
             datePicker.topAnchor.constraint(equalTo: dataPickerLabel.bottomAnchor, constant: 15),
-            datePicker.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
-            datePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-            datePicker.widthAnchor.constraint(equalToConstant: 100),
+            datePicker.centerXAnchor.constraint(equalTo: habitScrollView.centerXAnchor),
+    //        datePicker.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
+  //          datePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
+  //          datePicker.widthAnchor.constraint(equalToConstant: 100),
             datePicker.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor, constant: -219),
 
             deleteHabitButton.centerXAnchor.constraint(equalTo: habitScrollView.centerXAnchor),

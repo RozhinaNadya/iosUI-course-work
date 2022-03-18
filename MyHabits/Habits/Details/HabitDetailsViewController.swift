@@ -65,6 +65,11 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellDetails, for: indexPath) as? HabitDetailsTableViewCell else { fatalError() }
         cell.dayLabel.text = "\(HabitsStore.shared.trackDateString(forIndex: indexPath.row)!)"
+        if HabitsStore.shared.habit(habitForEdit, isTrackedIn: HabitsStore.shared.dates[indexPath.item]) {
+            cell.checkImageView.isHidden = false
+        } else {
+            cell.checkImageView.isHidden = true
+        }
         return cell
     }
     

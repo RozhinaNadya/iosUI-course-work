@@ -127,6 +127,7 @@ extension HabitsViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 22, left: 6, bottom: 6, right: 6)
     }
+    
 }
 
 /*extension HabitsViewController: HabitsViewControllerDelegate {

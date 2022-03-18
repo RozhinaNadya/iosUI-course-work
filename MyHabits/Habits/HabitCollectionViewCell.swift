@@ -23,6 +23,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
     var habitNameLabel: UILabel = {
         let label = UILabel()
         label.font = .habitNameFont
+        label.numberOfLines = 2
         label.toAutoLayout()
         return label
     }()
@@ -88,11 +89,12 @@ class HabitCollectionViewCell: UICollectionViewCell {
 
             habitNameLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 20),
             habitNameLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
+            habitNameLabel.widthAnchor.constraint(equalToConstant: 220),
+
             
             targetTimeLabel.topAnchor.constraint(equalTo: habitNameLabel.bottomAnchor, constant: 4),
             targetTimeLabel.leadingAnchor.constraint(equalTo: habitNameLabel.leadingAnchor),
             
-            timerLabel.topAnchor.constraint(equalTo: targetTimeLabel.bottomAnchor, constant: 30),
             timerLabel.leadingAnchor.constraint(equalTo: targetTimeLabel.leadingAnchor),
             timerLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -20),
             
