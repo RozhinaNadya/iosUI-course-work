@@ -22,7 +22,6 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         let title = UILabel()
         title.font = .footnoteFont
         title.textColor = .darkGray
- //       title.text = "Всё получится!"
         title.toAutoLayout()
         return title
     }()
@@ -62,7 +61,6 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(backView)
         backView.addSubviews([titleProgressLabel, progressView, progressProcentLabel])
         NSLayoutConstraint.activate([
-            
             backView.topAnchor.constraint(equalTo: contentView.topAnchor),
             backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -78,7 +76,6 @@ class ProgressCollectionViewCell: UICollectionViewCell {
             
             progressProcentLabel.topAnchor.constraint(equalTo: titleProgressLabel.topAnchor),
             progressProcentLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -12)
-
         ])
     }
     
@@ -89,5 +86,4 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }

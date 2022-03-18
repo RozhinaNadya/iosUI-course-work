@@ -20,7 +20,7 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     let cellHabit = "HebitCollectionViewCell"
     let cellProgress = "ProgressCollectionViewCell"
-                
+    
     init( color: UIColor) {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
@@ -86,7 +86,6 @@ extension HabitsViewController {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellHabit, for: indexPath) as? HabitCollectionViewCell else { fatalError() }
-  //  let myHabit = HabitsStore.shared.habits[indexPath.row]
             let myHabit = HabitsStore.shared.habits[indexPath.item]
             cell.habitNameLabel.text = "\(myHabit.name)"
             cell.targetTimeLabel.text = "\(myHabit.dateString)"
@@ -129,15 +128,3 @@ extension HabitsViewController {
     }
     
 }
-
-/*extension HabitsViewController: HabitsViewControllerDelegate {
-    func imageTapped(habit: Habit) {
-
-        if !habit.isAlreadyTakenToday {
-            HabitsStore.shared.track(habit)
-            
-            habitsCollectionView.reloadData()
-            }
-        
-    }
-}*/

@@ -57,40 +57,37 @@ class HabitCollectionViewCell: UICollectionViewCell {
         checkPointImageView.isUserInteractionEnabled = true
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImageView))
         checkPointImageView.addGestureRecognizer(tapGestureRecognizer)
-
     }
     
     func forColor(habit: Habit) {
         if habit.isAlreadyTakenToday {
-                    checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
-            } else {
-                checkPointImageView.image = UIImage(systemName: "circle")
-            }
+            checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
+        } else {
+            checkPointImageView.image = UIImage(systemName: "circle")
+        }
     }
     
     @objc func didTapImageView() {
         print("tap buttonColor")
-             if habitForTap!.isAlreadyTakenToday {
-                 return
-             } else {
-                 HabitsStore.shared.track(habitForTap!)
-             }
+        if habitForTap!.isAlreadyTakenToday {
+            return
+        } else {
+            HabitsStore.shared.track(habitForTap!)
+        }
     }
     
     func constraintsHabitViewCell() {
         contentView.addSubview(backView)
         backView.addSubviews([habitNameLabel, targetTimeLabel, timerLabel, checkPointImageView])
         NSLayoutConstraint.activate([
-            
             backView.topAnchor.constraint(equalTo: contentView.topAnchor),
             backView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             backView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             backView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-
+            
             habitNameLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 20),
             habitNameLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 20),
             habitNameLabel.widthAnchor.constraint(equalToConstant: 220),
-
             
             targetTimeLabel.topAnchor.constraint(equalTo: habitNameLabel.bottomAnchor, constant: 4),
             targetTimeLabel.leadingAnchor.constraint(equalTo: habitNameLabel.leadingAnchor),
@@ -102,7 +99,6 @@ class HabitCollectionViewCell: UICollectionViewCell {
             checkPointImageView.centerYAnchor.constraint(equalTo: backView.centerYAnchor),
             checkPointImageView.heightAnchor.constraint(equalToConstant: 38),
             checkPointImageView.widthAnchor.constraint(equalToConstant: 38)
-
         ])
     }
     

@@ -66,13 +66,12 @@ class InfoViewController: UIViewController, UIScrollViewDelegate{
         titleInfoHabitsLabel.frame.size = infoScrollView.contentSize
         textInfoHabitsLabel.frame.size = infoScrollView.contentSize
         footnoteInfoHabitsLabel.frame.size = infoScrollView.contentSize
-
+        
         NSLayoutConstraint.activate([
             infoScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             infoScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             infoScrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             infoScrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-
             
             titleInfoHabitsLabel.topAnchor.constraint(equalTo: infoScrollView.topAnchor, constant: 22),
             titleInfoHabitsLabel.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor),

@@ -18,7 +18,7 @@ class HabitViewController: UIViewController {
         backgroundColor = color
         self.title = title
     }
-        
+    
     let habitScrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.toAutoLayout()
@@ -163,20 +163,17 @@ class HabitViewController: UIViewController {
     }
     
     @objc func safeHabit() {
-        print("safe safe safe")
-                
         if let habit = habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {
             HabitsStore.shared.habits[indexHabit].name = titleHabitTextField.text ?? "No title"
             HabitsStore.shared.habits[indexHabit].date = datePicker.date
             HabitsStore.shared.habits[indexHabit].color = colorButton.backgroundColor ?? .blue
             HabitsStore.shared.save()
             navigationController?.popToRootViewController(animated: true)
-
         } else {
-        let newHabit = Habit(name: titleHabitTextField.text ?? "No title",
-                             date: datePicker.date,
-                             color: colorButton.backgroundColor ?? .blue)
-        HabitsStore.shared.habits.append(newHabit)
+            let newHabit = Habit(name: titleHabitTextField.text ?? "No title",
+                                 date: datePicker.date,
+                                 color: colorButton.backgroundColor ?? .blue)
+            HabitsStore.shared.habits.append(newHabit)
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -189,9 +186,7 @@ class HabitViewController: UIViewController {
             HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.habit!)!)
             HabitsStore.shared.save()
             self.navigationController?.popToRootViewController(animated: true)
-
         }))
-
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -214,18 +209,14 @@ class HabitViewController: UIViewController {
             titleHabitLabel.topAnchor.constraint(equalTo: habitScrollView.topAnchor, constant: 21),
             titleHabitLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             titleHabitLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-  //          titleHabitLabel.widthAnchor.constraint(equalToConstant: 600),
             
             titleHabitTextField.topAnchor.constraint(equalTo: titleHabitLabel.bottomAnchor, constant: 7),
             titleHabitTextField.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             titleHabitTextField.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-  //          titleHabitTextField.widthAnchor.constraint(equalToConstant: 600),
-
             
             colorHabitLabel.topAnchor.constraint(equalTo: titleHabitTextField.bottomAnchor, constant: 15),
             colorHabitLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             colorHabitLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-    //        colorHabitLabel.widthAnchor.constraint(equalToConstant: 100),
             
             colorButton.topAnchor.constraint(equalTo: colorHabitLabel.bottomAnchor, constant: 7),
             colorButton.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
@@ -235,7 +226,6 @@ class HabitViewController: UIViewController {
             timeHabitLabel.topAnchor.constraint(equalTo: colorButton.bottomAnchor, constant: 15),
             timeHabitLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             timeHabitLabel.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
- //           timeHabitLabel.widthAnchor.constraint(equalToConstant: 100),
             
             dataPickerLabel.topAnchor.constraint(equalTo: timeHabitLabel.bottomAnchor, constant: 15),
             dataPickerLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
@@ -245,11 +235,8 @@ class HabitViewController: UIViewController {
             
             datePicker.topAnchor.constraint(equalTo: dataPickerLabel.bottomAnchor, constant: 15),
             datePicker.centerXAnchor.constraint(equalTo: habitScrollView.centerXAnchor),
-    //        datePicker.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
-  //          datePicker.trailingAnchor.constraint(equalTo: habitScrollView.trailingAnchor),
-  //          datePicker.widthAnchor.constraint(equalToConstant: 100),
             datePicker.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor, constant: -219),
-
+            
             deleteHabitButton.centerXAnchor.constraint(equalTo: habitScrollView.centerXAnchor),
             deleteHabitButton.bottomAnchor.constraint(equalTo: habitScrollView.bottomAnchor),
             deleteHabitButton.heightAnchor.constraint(equalToConstant: 22),

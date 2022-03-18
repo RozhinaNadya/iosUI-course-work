@@ -8,7 +8,7 @@
 import UIKit
 
 class HabitDetailsTableViewCell: UITableViewCell {
-        
+    
     var dayLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .white
