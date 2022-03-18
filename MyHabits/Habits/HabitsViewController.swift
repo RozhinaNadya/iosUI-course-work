@@ -43,7 +43,6 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.view.backgroundColor = UIColor.white
         self.navigationItem.title = "Сегодня"
         self.navigationController?.navigationBar.prefersLargeTitles = true
- //       self.habitsTableView.separatorStyle = .none
     }
     
     @objc func addNewHabit() {
@@ -64,12 +63,6 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    /*   func imageTapped(habit: Habit) {
-        if habit.isAlreadyTakenToday {
-            HabitsStore.shared.track(habit)
-        }
-    }*/
 }
 
 extension HabitsViewController {
@@ -136,7 +129,7 @@ extension HabitsViewController {
         return UIEdgeInsets(top: 22, left: 6, bottom: 6, right: 6)
     }
 }
-/*
+
 extension HabitsViewController: HabitsViewControllerDelegate {
     func imageTapped(habit: Habit) {
 
@@ -145,4 +138,4 @@ extension HabitsViewController: HabitsViewControllerDelegate {
             }
         
     }
-}*/
+}

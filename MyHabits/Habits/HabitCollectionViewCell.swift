@@ -69,13 +69,13 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func didTapImageView() {
-   //     if habitForTap!.isAlreadyTakenToday {
-            HabitsStore.shared.track(habitForTap!)
-  //      }
-   /*     guard let habit = habitForTap else { return }
-
-        delegate?.imageTapped(habit: habit)*/
-   //     checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
+        guard let habit = habitForTap else { return }
+        delegate?.imageTapped(habit: habit)
+        
+        // второй вариант:
+        //     if habitForTap!.isAlreadyTakenToday {
+        //         HabitsStore.shared.track(habitForTap!)
+       //      }
         
     }
     

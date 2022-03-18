@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//пока не нужно
+
 protocol HabitsViewControllerDelegate: AnyObject {
     func imageTapped(habit: Habit)
 }
