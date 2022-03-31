@@ -7,10 +7,14 @@
 
 import UIKit
 
-class HabitsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HabitsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
     
     var backgroundColor: UIColor = .white
     
+    let newHabitVC = HabitViewController(color: .white, title: "Создать")
+    
+    var detailsViewController: HabitDetailsViewController?
+            
     let habitsCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.backgroundColor = UIColor(named: "allBackgroundColor")
@@ -43,11 +47,13 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.view.backgroundColor = UIColor.white
         self.navigationItem.title = "Сегодня"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        newHabitVC.delegate = self
+//        self.detailsViewController?.delegateDetailsHabits = self
     }
     
     @objc func addNewHabit() {
-        let newHabit = UINavigationController(rootViewController: HabitViewController(color: .white, title: "Создать"))
-        present(newHabit, animated: true)
+        let navigationHabit = UINavigationController(rootViewController: newHabitVC)
+        present(navigationHabit, animated: true)
     }
     
     func constraintsHabitsViewController() {
@@ -99,8 +105,8 @@ extension HabitsViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name, habitForEdit: HabitsStore.shared.habits[indexPath.item])
-        navigationController?.pushViewController(detailsViewController, animated: true)
+        detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name, habitForEdit: HabitsStore.shared.habits[indexPath.item])
+        navigationController?.pushViewController(detailsViewController!, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
@@ -126,5 +132,15 @@ extension HabitsViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 22, left: 6, bottom: 6, right: 6)
     }
-    
+         
 }
+
+extension HabitsViewController: HabitsViewControllerDelegate {
+    
+     func reloadCollectionView() {
+         print("reloadCollectionView")
+         self.habitsCollectionView.reloadData()
+//         navigationController?.popToRootViewController(animated: true)
+    }
+}
+

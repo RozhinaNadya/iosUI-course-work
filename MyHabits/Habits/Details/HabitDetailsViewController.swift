@@ -7,9 +7,12 @@
 
 import UIKit
 
-class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     var habitForEdit: Habit
+    
+    let editHabitVC = HabitViewController(color: .white, title: "Править")
+    var delegateDetailsHabits: HabitDetailsVCDelegate?
     
     var detailsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -34,7 +37,8 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         constraintsDetailsViewContriller()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(editHabit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(doEditHabit))
+        editHabitVC.delegateDetails = self
     }
     
     func constraintsDetailsViewContriller() {
@@ -47,11 +51,10 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         ])
     }
     
-    @objc func editHabit() {
-        let editHabit = HabitViewController(color: .white, title: "Править")
-        editHabit.thisHabit(habit: habitForEdit)
-        editHabit.deleteHabitButton.isHidden = false
-        navigationController?.pushViewController(editHabit, animated: true)
+    @objc func doEditHabit() {
+        editHabitVC.thisHabit(habit: habitForEdit)
+        editHabitVC.deleteHabitButton.isHidden = false
+        navigationController?.pushViewController(editHabitVC, animated: true)
     }
     
     required init?(coder: NSCoder) {
@@ -75,5 +78,13 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         "АКТИВНОСТЬ"
+    }
+}
+
+extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
+    func handlerToHabits() {
+        print("handlerToHabits")
+ //       editHabitVC.delegate?.reloadCollectionView()
+        delegateDetailsHabits?.changeVC()
     }
 }

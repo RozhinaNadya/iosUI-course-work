@@ -10,9 +10,14 @@ import UIKit
 class HabitViewController: UIViewController {
     
     var backgroundColor: UIColor = .white
+
+    var delegate: HabitsViewControllerDelegate?
+    var delegateDetails: HabitDetailsViewControllerDelegate?
+    
+    var delails: HabitDetailsViewController?
     
     var habit: Habit?
-    
+        
     init( color: UIColor, title: String = "Title") {
         super.init(nibName: nil, bundle: nil)
         backgroundColor = color
@@ -126,6 +131,7 @@ class HabitViewController: UIViewController {
         getDateFromPicker()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelHabit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
+        delails?.delegateDetailsHabits = self
     }
     
     @objc func getDateFromPicker() {
@@ -163,19 +169,22 @@ class HabitViewController: UIViewController {
     }
     
     @objc func safeHabit() {
-        if let habit = habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {
-            HabitsStore.shared.habits[indexHabit].name = titleHabitTextField.text ?? "No title"
-            HabitsStore.shared.habits[indexHabit].date = datePicker.date
-            HabitsStore.shared.habits[indexHabit].color = colorButton.backgroundColor ?? .blue
+        if let habit = self.habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {
+            HabitsStore.shared.habits[indexHabit].name = self.titleHabitTextField.text ?? "No Title"
+            HabitsStore.shared.habits[indexHabit].date = self.datePicker.date
+            HabitsStore.shared.habits[indexHabit].color = self.colorButton.backgroundColor ?? .blue
             HabitsStore.shared.save()
+            self.delegateDetails?.handlerToHabits()
             navigationController?.popToRootViewController(animated: true)
         } else {
-            let newHabit = Habit(name: titleHabitTextField.text ?? "No title",
-                                 date: datePicker.date,
-                                 color: colorButton.backgroundColor ?? .blue)
+            let newHabit = Habit(name: self.titleHabitTextField.text ?? "No title",
+                                 date: self.datePicker.date,
+                                 color: self.colorButton.backgroundColor ?? .blue)
             HabitsStore.shared.habits.append(newHabit)
-            self.dismiss(animated: true, completion: nil)
         }
+        self.dismiss(animated: true, completion: { self.delegate?.reloadCollectionView()
+    })
+
     }
     
     @objc func deleteHabit() {
@@ -258,5 +267,14 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidSelectColor(_ viewController: UIColorPickerViewController) {
         let color = viewController.selectedColor
         colorButton.backgroundColor = color
+    }
+}
+
+extension HabitViewController: HabitDetailsVCDelegate {
+    func changeVC() {
+        print("changeVC")
+     //   self.delegate?.reloadCollectionView()
+        self.dismiss(animated: true, completion: { self.delegate?.reloadCollectionView()
+    })
     }
 }
