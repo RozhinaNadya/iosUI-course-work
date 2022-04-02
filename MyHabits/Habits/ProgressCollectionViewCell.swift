@@ -45,16 +45,10 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         constraintsProgressViewCell()
         contentView.backgroundColor = UIColor(named: "allBackgroundColor")
-        progressProcentLabel.text = "\(toProcent(progress: progressView.progress))%"
-        progressText()
     }
     
-    func progressText() {
-        if toProcent(progress: progressView.progress) == 100 {
-            titleProgressLabel.text = "Супер! Сегодня всё выполнено"
-        } else {
-            titleProgressLabel.text = "Всё получится!"
-        }
+       func progressText() {
+        toProcent(progress: progressView.progress) == 100 ? (titleProgressLabel.text = "Супер! Сегодня всё выполнено") : (titleProgressLabel.text = "Всё получится!")
     }
     
     func constraintsProgressViewCell() {

@@ -11,6 +11,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     var habitForTap: Habit?
     
+    var delegat: HabitsViewControllerDelegate?
+    
     let backView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -60,20 +62,13 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }
     
     func forColor(habit: Habit) {
-        if habit.isAlreadyTakenToday {
-            checkPointImageView.image = UIImage(systemName: "checkmark.circle.fill")
-        } else {
-            checkPointImageView.image = UIImage(systemName: "circle")
-        }
+        checkPointImageView.image = habit.isAlreadyTakenToday ? UIImage(systemName: "checkmark.circle.fill") : UIImage(systemName: "circle")
     }
     
     @objc func didTapImageView() {
         print("tap buttonColor")
-        if habitForTap!.isAlreadyTakenToday {
-            return
-        } else {
-            HabitsStore.shared.track(habitForTap!)
-        }
+        habitForTap!.isAlreadyTakenToday ? nil : HabitsStore.shared.track(habitForTap!)
+        delegat?.reloadCollectionView()
     }
     
     func constraintsHabitViewCell() {

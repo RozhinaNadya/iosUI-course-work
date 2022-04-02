@@ -89,6 +89,8 @@ extension HabitsViewController {
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellProgress, for: indexPath) as? ProgressCollectionViewCell else { fatalError() }
             cell.progressView.progress = HabitsStore.shared.todayProgress
+            cell.progressText()
+            cell.progressProcentLabel.text = "\(cell.toProcent(progress: cell.progressView.progress))%"
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellHabit, for: indexPath) as? HabitCollectionViewCell else { fatalError() }
@@ -100,6 +102,8 @@ extension HabitsViewController {
             cell.habitNameLabel.textColor = myHabit.color
             cell.habitForTap = myHabit
             cell.forColor(habit: myHabit)
+ //           habitsCollectionView.reloadData()
+            cell.delegat = self
             return cell
         }
     }
