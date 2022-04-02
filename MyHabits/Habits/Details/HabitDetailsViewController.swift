@@ -12,7 +12,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     var habitForEdit: Habit
     
     let editHabitVC = HabitViewController(color: .white, title: "Править")
-    var delegateDetailsHabits: HabitDetailsVCDelegate?
+//    var delegateDetailsHabits: HabitDetailsVCDelegate?
     
     var detailsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -38,7 +38,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(doEditHabit))
-        editHabitVC.delegateDetails = self
+//        editHabitVC.delegateDetails = self
     }
     
     func constraintsDetailsViewContriller() {
@@ -52,6 +52,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @objc func doEditHabit() {
+//        let editHabitVC = HabitViewController(color: .white, title: "Править")
         editHabitVC.thisHabit(habit: habitForEdit)
         editHabitVC.deleteHabitButton.isHidden = false
         navigationController?.pushViewController(editHabitVC, animated: true)
@@ -81,10 +82,10 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
 }
 
-extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
+/*extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
     func handlerToHabits() {
         print("handlerToHabits")
  //       editHabitVC.delegate?.reloadCollectionView()
-        delegateDetailsHabits?.changeVC()
+        self.delegateDetailsHabits?.changeVC()
     }
-}
+}*/

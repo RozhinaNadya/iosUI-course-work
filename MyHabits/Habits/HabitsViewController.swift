@@ -48,7 +48,6 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.navigationItem.title = "Сегодня"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         newHabitVC.delegate = self
-//        self.detailsViewController?.delegateDetailsHabits = self
     }
     
     @objc func addNewHabit() {
@@ -102,8 +101,8 @@ extension HabitsViewController {
             cell.habitNameLabel.textColor = myHabit.color
             cell.habitForTap = myHabit
             cell.forColor(habit: myHabit)
- //           habitsCollectionView.reloadData()
             cell.delegat = self
+  //          detailsViewController?.delegateDetailsHabits = (cell.self as! HabitDetailsVCDelegate)
             return cell
         }
     }

@@ -7,6 +7,6 @@
 
 import UIKit
 
-protocol HabitDetailsVCDelegate: AnyObject {
+/*protocol HabitDetailsVCDelegate: AnyObject {
     func changeVC()
-}
+}*/

@@ -12,9 +12,9 @@ class HabitViewController: UIViewController {
     var backgroundColor: UIColor = .white
 
     var delegate: HabitsViewControllerDelegate?
-    var delegateDetails: HabitDetailsViewControllerDelegate?
+//    var delegateDetails: HabitDetailsViewControllerDelegate?
     
-    var delails: HabitDetailsViewController?
+//    var details: HabitDetailsViewController?
     
     var habit: Habit?
         
@@ -131,7 +131,8 @@ class HabitViewController: UIViewController {
         getDateFromPicker()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelHabit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
-        delails?.delegateDetailsHabits = self
+//        self.details?.delegateDetailsHabits = self
+        
     }
     
     @objc func getDateFromPicker() {
@@ -169,15 +170,21 @@ class HabitViewController: UIViewController {
     }
     
     @objc func safeHabit() {
+        guard let habitNewName = self.titleHabitTextField.text, !habitNewName.isEmpty else { return }
+        
         if let habit = self.habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {
-            HabitsStore.shared.habits[indexHabit].name = self.titleHabitTextField.text ?? "No Title"
+            HabitsStore.shared.habits[indexHabit].name = habitNewName
             HabitsStore.shared.habits[indexHabit].date = self.datePicker.date
             HabitsStore.shared.habits[indexHabit].color = self.colorButton.backgroundColor ?? .blue
             HabitsStore.shared.save()
-            self.delegateDetails?.handlerToHabits()
+            let detailsVC = HabitDetailsViewController(habitForEdit: habit)
+    //        detailsVC.delegateDetailsHabits = self
+   //         detailsVC.editHabitVC.delegateDetails?.handlerToHabits()
+  //          self.delegateDetails?.handlerToHabits()
+            detailsVC.editHabitVC.delegate?.reloadCollectionView()
             navigationController?.popToRootViewController(animated: true)
         } else {
-            let newHabit = Habit(name: self.titleHabitTextField.text ?? "No title",
+            let newHabit = Habit(name: habitNewName,
                                  date: self.datePicker.date,
                                  color: self.colorButton.backgroundColor ?? .blue)
             HabitsStore.shared.habits.append(newHabit)
@@ -194,6 +201,7 @@ class HabitViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: {alert -> Void in
             HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.habit!)!)
             HabitsStore.shared.save()
+ //           self.delegateDetails?.handlerToHabits()
             self.navigationController?.popToRootViewController(animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -270,11 +278,10 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
     }
 }
 
-extension HabitViewController: HabitDetailsVCDelegate {
+/*extension HabitViewController: HabitDetailsVCDelegate {
     func changeVC() {
         print("changeVC")
-     //   self.delegate?.reloadCollectionView()
-        self.dismiss(animated: true, completion: { self.delegate?.reloadCollectionView()
-    })
+            self.delegate?.reloadCollectionView()
+        
     }
-}
+}*/
