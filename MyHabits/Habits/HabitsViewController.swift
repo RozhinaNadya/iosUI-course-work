@@ -102,15 +102,14 @@ extension HabitsViewController {
             cell.habitForTap = myHabit
             cell.forColor(habit: myHabit)
             cell.delegat = self
-  //          detailsViewController?.delegateDetailsHabits = (cell.self as! HabitDetailsVCDelegate)
             return cell
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name, habitForEdit: HabitsStore.shared.habits[indexPath.item])
+        detailsViewController?.delegate = self
         navigationController?.pushViewController(detailsViewController!, animated: true)
- //       collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -121,7 +120,6 @@ extension HabitsViewController {
         } else {
             return CGSize(width: collectionView.bounds.width - 32, height: 130)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -135,7 +133,6 @@ extension HabitsViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 22, left: 6, bottom: 6, right: 6)
     }
-         
 }
 
 extension HabitsViewController: HabitsViewControllerDelegate {

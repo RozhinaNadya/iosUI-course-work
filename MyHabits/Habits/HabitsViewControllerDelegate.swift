@@ -9,6 +9,4 @@ import UIKit
 
 protocol HabitsViewControllerDelegate: AnyObject {
     func reloadCollectionView()
- //   func handler()
-
 }

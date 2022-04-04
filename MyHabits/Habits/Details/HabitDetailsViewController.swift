@@ -11,6 +11,8 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     var habitForEdit: Habit
     
+    var delegate: HabitsViewControllerDelegate?
+    
     let cellDetails = "DetailsTableViewCell"
     
     let editHabitVC = HabitViewController(color: .white, title: "Править")
@@ -86,6 +88,11 @@ extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
     func handlerToHabits(habit: Habit) {
         print("handlerToHabits")
         self.navigationItem.title = habit.name
-        self.editHabitVC.delegate?.reloadCollectionView()
+        self.delegate?.reloadCollectionView()
+    }
+    
+    func close() {
+        self.delegate?.reloadCollectionView()
+        navigationController?.popToRootViewController(animated: true)
     }
 }

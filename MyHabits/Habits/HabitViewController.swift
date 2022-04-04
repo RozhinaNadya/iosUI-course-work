@@ -167,6 +167,7 @@ class HabitViewController: UIViewController {
     }
     
     @objc func safeHabit() {
+        
         guard let habitNewName = self.titleHabitTextField.text, !habitNewName.isEmpty else { return }
         
         if let habit = self.habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {
@@ -175,14 +176,15 @@ class HabitViewController: UIViewController {
             HabitsStore.shared.habits[indexHabit].color = self.colorButton.backgroundColor ?? .blue
             HabitsStore.shared.save()
             self.delegateDetails?.handlerToHabits(habit: habit)
+            self.dismiss(animated: true, completion: nil)
         } else {
             let newHabit = Habit(name: habitNewName,
                                  date: self.datePicker.date,
                                  color: self.colorButton.backgroundColor ?? .blue)
             HabitsStore.shared.habits.append(newHabit)
             self.delegate?.reloadCollectionView()
+            self.dismiss(animated: true, completion: {self.delegate?.reloadCollectionView()})
         }
-        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func deleteHabit() {
@@ -192,11 +194,8 @@ class HabitViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: {alert -> Void in
             HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.habit!)!)
             HabitsStore.shared.save()
-            self.delegate?.reloadCollectionView()
+            self.delegateDetails?.close()
             self.dismiss(animated: true, completion: nil)
-
-         //   self.delegate?.reloadCollectionView()
-        //    self.navigationController?.popToRootViewController(animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
     }

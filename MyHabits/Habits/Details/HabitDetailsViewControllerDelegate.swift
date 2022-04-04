@@ -9,4 +9,5 @@ import UIKit
 
 protocol HabitDetailsViewControllerDelegate: AnyObject {
     func handlerToHabits(habit: Habit)
+    func close()
 }
