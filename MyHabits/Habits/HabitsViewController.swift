@@ -9,7 +9,7 @@ import UIKit
 
 class HabitsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
     
-    var backgroundColor: UIColor = .white
+    var backgroundColor: UIColor = UIColor(named: "allBackgroundColor")!
     
     let newHabitVC = HabitViewController(color: .white, title: "Создать")
     
@@ -44,7 +44,7 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         habitsCollectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: cellProgress)
         habitsCollectionView.dataSource = self
         habitsCollectionView.delegate = self
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(named: "allBackgroundColor")!
         self.navigationItem.title = "Сегодня"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         newHabitVC.delegate = self
@@ -116,14 +116,22 @@ extension HabitsViewController {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
-            return CGSize(width: collectionView.bounds.width - 32, height: 60)
+
+            if (UIWindow.isLandscape) {
+                return CGSize(width: collectionView.bounds.width - 14, height: 60)
+            } else {
+                return CGSize(width: collectionView.bounds.width - 32, height: 60)}
         } else {
-            return CGSize(width: collectionView.bounds.width - 32, height: 130)
+
+            if (UIWindow.isLandscape) {
+                return CGSize(width: collectionView.bounds.width/2 - 14, height: 130)
+            } else {
+                return CGSize(width: collectionView.bounds.width - 32, height: 130)}
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        12
+        6
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -16,6 +16,7 @@
 		842B582E27C597B400F70B6C /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B582D27C597B400F70B6C /* InfoViewController.swift */; };
 		842B583027C5A0DE00F70B6C /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B582F27C5A0DD00F70B6C /* TabBar.swift */; };
 		842B583227C6B5F000F70B6C /* Extensions(UIView).swift in Sources */ = {isa = PBXBuildFile; fileRef = 842B583127C6B5F000F70B6C /* Extensions(UIView).swift */; };
+		8458412927FB423700459AAD /* Extensions(UIWindow).swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458412827FB423700459AAD /* Extensions(UIWindow).swift */; };
 		84A1889227C9263E00771B6C /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889127C9263E00771B6C /* HabitViewController.swift */; };
 		84A1889727DF94CC00771B6C /* Extensions(UIFont).swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */; };
 		84A1889A27DFB10D00771B6C /* HabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */; };
@@ -38,6 +39,7 @@
 		842B582D27C597B400F70B6C /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		842B582F27C5A0DD00F70B6C /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		842B583127C6B5F000F70B6C /* Extensions(UIView).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIView).swift"; sourceTree = "<group>"; };
+		8458412827FB423700459AAD /* Extensions(UIWindow).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIWindow).swift"; sourceTree = "<group>"; };
 		84A1889127C9263E00771B6C /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions(UIFont).swift"; sourceTree = "<group>"; };
 		84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -98,8 +100,8 @@
 				842B582B27C5979A00F70B6C /* HabitsViewController.swift */,
 				84A1889127C9263E00771B6C /* HabitViewController.swift */,
 				84A1889927DFB10D00771B6C /* HabitCollectionViewCell.swift */,
-				84C9C02927EDD0D4000CC49B /* HabitsViewControllerDelegate.swift */,
 				84A1889D27E0A70400771B6C /* ProgressCollectionViewCell.swift */,
+				84C9C02927EDD0D4000CC49B /* HabitsViewControllerDelegate.swift */,
 				84F2CE5627E36E4F00677DCA /* Details */,
 			);
 			path = Habits;
@@ -110,6 +112,7 @@
 			children = (
 				842B583127C6B5F000F70B6C /* Extensions(UIView).swift */,
 				84A1889627DF94CC00771B6C /* Extensions(UIFont).swift */,
+				8458412827FB423700459AAD /* Extensions(UIWindow).swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				84F2CE5327E36ACC00677DCA /* HabitDetailsViewController.swift in Sources */,
 				84C9C02A27EDD0D4000CC49B /* HabitsViewControllerDelegate.swift in Sources */,
 				842B581827C58BEC00F70B6C /* SceneDelegate.swift in Sources */,
+				8458412927FB423700459AAD /* Extensions(UIWindow).swift in Sources */,
 				84C9C0D527F60726000CC49B /* HabitDetailsViewControllerDelegate.swift in Sources */,
 				84A1889227C9263E00771B6C /* HabitViewController.swift in Sources */,
 				842B583027C5A0DE00F70B6C /* TabBar.swift in Sources */,
