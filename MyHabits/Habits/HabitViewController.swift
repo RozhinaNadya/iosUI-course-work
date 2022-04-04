@@ -12,17 +12,10 @@ class HabitViewController: UIViewController {
     var backgroundColor: UIColor = .white
 
     var delegate: HabitsViewControllerDelegate?
-//    var delegateDetails: HabitDetailsViewControllerDelegate?
     
-//    var details: HabitDetailsViewController?
-    
-    var habit: Habit?
+    var delegateDetails: HabitDetailsViewControllerDelegate?
         
-    init( color: UIColor, title: String = "Title") {
-        super.init(nibName: nil, bundle: nil)
-        backgroundColor = color
-        self.title = title
-    }
+    var habit: Habit?
     
     let habitScrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -111,6 +104,12 @@ class HabitViewController: UIViewController {
         return button
     }()
     
+    init( color: UIColor, title: String = "Title") {
+        super.init(nibName: nil, bundle: nil)
+        backgroundColor = color
+        self.title = title
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -131,8 +130,6 @@ class HabitViewController: UIViewController {
         getDateFromPicker()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelHabit))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
-//        self.details?.delegateDetailsHabits = self
-        
     }
     
     @objc func getDateFromPicker() {
@@ -177,21 +174,15 @@ class HabitViewController: UIViewController {
             HabitsStore.shared.habits[indexHabit].date = self.datePicker.date
             HabitsStore.shared.habits[indexHabit].color = self.colorButton.backgroundColor ?? .blue
             HabitsStore.shared.save()
-            let detailsVC = HabitDetailsViewController(habitForEdit: habit)
-    //        detailsVC.delegateDetailsHabits = self
-   //         detailsVC.editHabitVC.delegateDetails?.handlerToHabits()
-  //          self.delegateDetails?.handlerToHabits()
-            detailsVC.editHabitVC.delegate?.reloadCollectionView()
-            navigationController?.popToRootViewController(animated: true)
+            self.delegateDetails?.handlerToHabits(habit: habit)
         } else {
             let newHabit = Habit(name: habitNewName,
                                  date: self.datePicker.date,
                                  color: self.colorButton.backgroundColor ?? .blue)
             HabitsStore.shared.habits.append(newHabit)
+            self.delegate?.reloadCollectionView()
         }
-        self.dismiss(animated: true, completion: { self.delegate?.reloadCollectionView()
-    })
-
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func deleteHabit() {
@@ -201,8 +192,11 @@ class HabitViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: {alert -> Void in
             HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.habit!)!)
             HabitsStore.shared.save()
- //           self.delegateDetails?.handlerToHabits()
-            self.navigationController?.popToRootViewController(animated: true)
+            self.delegate?.reloadCollectionView()
+            self.dismiss(animated: true, completion: nil)
+
+         //   self.delegate?.reloadCollectionView()
+        //    self.navigationController?.popToRootViewController(animated: true)
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -278,10 +272,3 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
     }
 }
 
-/*extension HabitViewController: HabitDetailsVCDelegate {
-    func changeVC() {
-        print("changeVC")
-            self.delegate?.reloadCollectionView()
-        
-    }
-}*/

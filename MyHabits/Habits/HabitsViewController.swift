@@ -110,7 +110,7 @@ extension HabitsViewController {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name, habitForEdit: HabitsStore.shared.habits[indexPath.item])
         navigationController?.pushViewController(detailsViewController!, animated: true)
-        collectionView.deselectItem(at: indexPath, animated: true)
+ //       collectionView.deselectItem(at: indexPath, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -143,7 +143,6 @@ extension HabitsViewController: HabitsViewControllerDelegate {
      func reloadCollectionView() {
          print("reloadCollectionView")
          self.habitsCollectionView.reloadData()
-//         navigationController?.popToRootViewController(animated: true)
     }
 }
 

@@ -7,6 +7,6 @@
 
 import UIKit
 
-/*protocol HabitDetailsViewControllerDelegate: AnyObject {
-    func handlerToHabits()
-}*/
+protocol HabitDetailsViewControllerDelegate: AnyObject {
+    func handlerToHabits(habit: Habit)
+}

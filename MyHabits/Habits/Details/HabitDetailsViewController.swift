@@ -11,8 +11,9 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     var habitForEdit: Habit
     
+    let cellDetails = "DetailsTableViewCell"
+    
     let editHabitVC = HabitViewController(color: .white, title: "Править")
-//    var delegateDetailsHabits: HabitDetailsVCDelegate?
     
     var detailsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -20,9 +21,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         tableView.toAutoLayout()
         return tableView
     }()
-    
-    let cellDetails = "DetailsTableViewCell"
-    
+        
     init(title: String = "Title", habitForEdit: Habit) {
         self.habitForEdit = habitForEdit
         super.init(nibName: nil, bundle: nil)
@@ -38,7 +37,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(doEditHabit))
-//        editHabitVC.delegateDetails = self
+        editHabitVC.delegateDetails = self
     }
     
     func constraintsDetailsViewContriller() {
@@ -52,10 +51,11 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     @objc func doEditHabit() {
-//        let editHabitVC = HabitViewController(color: .white, title: "Править")
         editHabitVC.thisHabit(habit: habitForEdit)
         editHabitVC.deleteHabitButton.isHidden = false
-        navigationController?.pushViewController(editHabitVC, animated: true)
+        let navigationHabit = UINavigationController(rootViewController: editHabitVC)
+        navigationHabit.modalPresentationStyle = .fullScreen
+        present(navigationHabit, animated: true, completion: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -82,10 +82,10 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
 }
 
-/*extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
-    func handlerToHabits() {
+extension HabitDetailsViewController: HabitDetailsViewControllerDelegate {
+    func handlerToHabits(habit: Habit) {
         print("handlerToHabits")
- //       editHabitVC.delegate?.reloadCollectionView()
-        self.delegateDetailsHabits?.changeVC()
+        self.navigationItem.title = habit.name
+        self.editHabitVC.delegate?.reloadCollectionView()
     }
-}*/
+}
