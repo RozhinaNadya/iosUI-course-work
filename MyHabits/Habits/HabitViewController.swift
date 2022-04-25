@@ -75,8 +75,8 @@ class HabitViewController: UIViewController {
         return label
     }()
     
-    let txtDatePicker: UITextField = {
-        let textDate = UITextField()
+    let DatePickerLabel: UILabel = {
+        let textDate = UILabel()
         textDate.textColor = UIColor(named: "AccentColor")
         textDate.font = .bodyFont
         textDate.toAutoLayout()
@@ -125,7 +125,6 @@ class HabitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         constraintsHabitViewController()
-        txtDatePicker.inputView = datePicker
         datePicker.datePickerMode = .time
         getDateFromPicker()
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelHabit))
@@ -135,7 +134,7 @@ class HabitViewController: UIViewController {
     @objc func getDateFromPicker() {
         let formatter = DateFormatter()
         formatter.dateFormat = "HH:mm a"
-        txtDatePicker.text = formatter.string(from: datePicker.date)
+        DatePickerLabel.text = formatter.string(from: datePicker.date)
     }
     
     @objc func doneAction(){
@@ -167,7 +166,11 @@ class HabitViewController: UIViewController {
     
     @objc func safeHabit() {
         
-        guard let habitNewName = self.titleHabitTextField.text, !habitNewName.isEmpty else { return }
+        guard let habitNewName = self.titleHabitTextField.text, !habitNewName.isEmpty else {
+            let alert = UIAlertController(title: "No Title", message: "You can't save a habit without a title", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            return self.present(alert, animated: true, completion: nil)
+        }
         
         if let habit = self.habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {
             HabitsStore.shared.habits[indexHabit].name = habitNewName
@@ -208,7 +211,7 @@ class HabitViewController: UIViewController {
     
     func constraintsHabitViewController() {
         self.view.addSubview(habitScrollView)
-        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker, txtDatePicker, deleteHabitButton])
+        habitScrollView.addSubviews([titleHabitLabel, titleHabitTextField, colorHabitLabel, colorButton, timeHabitLabel, dataPickerLabel, datePicker, DatePickerLabel, deleteHabitButton])
         NSLayoutConstraint.activate([
             habitScrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             habitScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -239,8 +242,8 @@ class HabitViewController: UIViewController {
             dataPickerLabel.topAnchor.constraint(equalTo: timeHabitLabel.bottomAnchor, constant: 15),
             dataPickerLabel.leadingAnchor.constraint(equalTo: habitScrollView.leadingAnchor),
             
-            txtDatePicker.topAnchor.constraint(equalTo: dataPickerLabel.topAnchor),
-            txtDatePicker.leadingAnchor.constraint(equalTo: dataPickerLabel.trailingAnchor),
+            DatePickerLabel.topAnchor.constraint(equalTo: dataPickerLabel.topAnchor),
+            DatePickerLabel.leadingAnchor.constraint(equalTo: dataPickerLabel.trailingAnchor),
             
             datePicker.topAnchor.constraint(equalTo: dataPickerLabel.bottomAnchor, constant: 15),
             datePicker.centerXAnchor.constraint(equalTo: habitScrollView.centerXAnchor),
