@@ -25,7 +25,21 @@ class InfoViewController: UIViewController, UIScrollViewDelegate{
     
     let textInfoHabitsLabel: UILabel = {
         let textInfo = UILabel()
-        textInfo.text = "The passage of stages for which a habit is developed in 21 days is subject to the following algorithm: \n\n1. Spend 1 day without revisiting old habits, trying to act as if the goal, put into perspective, is just a step away. \n\n2. Maintain 2 days in the same state of self-control. \n\n3. To mark in the diary the first week of changes and sum up the first results - what turned out to be hard, what was easier, what still needs to be seriously fought. \n\n4. Congratulate yourself on passing your first major threshold at 21 days. During this time, the rejection of bad inclinations will already take the form of a conscious overcoming and a person will be able to work more towards the adoption of positive qualities. \n\n5. Hold the plank for 40 days. The practitioner of the technique already feels freed from past negativity and is moving in the right direction with good dynamics. \n\n6. On the 90th day of observing the technique, everything superfluous from the “past life” ceases to remind of itself, and a person, looking back, realizes that he is completely renewed."
+        textInfo.text = """
+The passage of stages for which a habit is developed in 21 days is subject to the following algorithm:
+
+ 1. Spend 1 day without revisiting old habits, trying to act as if the goal, put into perspective, is just a step away.
+
+ 2. Maintain 2 days in the same state of self-control.
+
+ 3. To mark in the diary the first week of changes and sum up the first results - what turned out to be hard, what was easier, what still needs to be seriously fought.
+
+ 4. Congratulate yourself on passing your first major threshold at 21 days. During this time, the rejection of bad inclinations will already take the form of a conscious overcoming and a person will be able to work more towards the adoption of positive qualities.
+
+ 5. Hold the plank for 40 days. The practitioner of the technique already feels freed from past negativity and is moving in the right direction with good dynamics.
+
+ 6. On the 90th day of observing the technique, everything superfluous from the “past life” ceases to remind of itself, and a person, looking back, realizes that he is completely renewed.
+"""
         textInfo.font = .bodyFont
         textInfo.numberOfLines = 0
         textInfo.toAutoLayout()

@@ -147,7 +147,7 @@ extension HabitsViewController {
     }
 }
 
-extension HabitsViewController: HabitsViewControllerDelegate {
+extension HabitsViewController: HabitCollectionViewCellDelegate {
     
      func reloadCollectionView() {
          print("reloadCollectionView")

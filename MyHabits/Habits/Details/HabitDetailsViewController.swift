@@ -11,7 +11,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     var habitForEdit: Habit
     
-    var delegate: HabitsViewControllerDelegate?
+    weak var delegate: HabitCollectionViewCellDelegate?
     
     let cellDetails = "DetailsTableViewCell"
     
@@ -19,7 +19,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     var detailsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.backgroundColor = UIColor(named: "allBackgroundColor")
+        tableView.backgroundColor = .allBackgroundColor
         tableView.toAutoLayout()
         return tableView
     }()
@@ -70,8 +70,8 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellDetails, for: indexPath) as? HabitDetailsTableViewCell else { fatalError() }
-        let indexHabit = indexPath.row
-        cell.dayLabel.text = "\(String(describing: HabitsStore.shared.trackDateString(forIndex: indexHabit)))"
+
+        cell.dayLabel.text = "\(HabitsStore.shared.trackDateString(forIndex: indexPath.row) ?? "Date unknown")"
         if HabitsStore.shared.habit(habitForEdit, isTrackedIn: HabitsStore.shared.dates[indexPath.item]) {
             cell.checkImageView.isHidden = false
         } else {

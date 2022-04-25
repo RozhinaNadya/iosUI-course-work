@@ -11,9 +11,9 @@ class HabitViewController: UIViewController {
     
     var backgroundColor: UIColor = .white
 
-    var delegate: HabitsViewControllerDelegate?
+    weak var delegate: HabitCollectionViewCellDelegate?
     
-    var delegateDetails: HabitDetailsViewControllerDelegate?
+    weak var delegateDetails: HabitDetailsViewControllerDelegate?
         
     var habit: Habit?
     

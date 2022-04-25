@@ -47,7 +47,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .allBackgroundColor
     }
     
-       func progressText() {
+    func progressText() {
         toProcent(progress: progressView.progress) == 100 ? (titleProgressLabel.text = "Great! All done today") : (titleProgressLabel.text = "Everything will work out!")
     }
     

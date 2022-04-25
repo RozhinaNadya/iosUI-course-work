@@ -11,7 +11,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
     
     var habitForTap: Habit?
     
-    var delegat: HabitsViewControllerDelegate?
+    weak var delegat: HabitCollectionViewCellDelegate?
     
     let backView: UIView = {
         let view = UIView()
