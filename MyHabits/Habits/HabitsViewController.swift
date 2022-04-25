@@ -11,7 +11,7 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     var backgroundColor: UIColor = UIColor(named: "allBackgroundColor")!
     
-    let newHabitVC = HabitViewController(color: .white, title: "Создать")
+    let newHabitVC = HabitViewController(color: .white, title: "Create")
     
     var detailsViewController: HabitDetailsViewController?
             
@@ -45,7 +45,7 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         habitsCollectionView.dataSource = self
         habitsCollectionView.delegate = self
         self.view.backgroundColor = UIColor(named: "allBackgroundColor")!
-        self.navigationItem.title = "Сегодня"
+        self.navigationItem.title = "Today"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         newHabitVC.delegate = self
     }
@@ -96,7 +96,7 @@ extension HabitsViewController {
             let myHabit = HabitsStore.shared.habits[indexPath.item]
             cell.habitNameLabel.text = "\(myHabit.name)"
             cell.targetTimeLabel.text = "\(myHabit.dateString)"
-            cell.timerLabel.text = "Счётчик: \(myHabit.trackDates.count)"
+            cell.timerLabel.text = "Count tracker: \(myHabit.trackDates.count)"
             cell.checkPointImageView.tintColor = myHabit.color
             cell.habitNameLabel.textColor = myHabit.color
             cell.habitForTap = myHabit

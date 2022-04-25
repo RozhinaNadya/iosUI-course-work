@@ -48,7 +48,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     }
     
        func progressText() {
-        toProcent(progress: progressView.progress) == 100 ? (titleProgressLabel.text = "Супер! Сегодня всё выполнено") : (titleProgressLabel.text = "Всё получится!")
+        toProcent(progress: progressView.progress) == 100 ? (titleProgressLabel.text = "Great! All done today") : (titleProgressLabel.text = "Everything will work out!")
     }
     
     func constraintsProgressViewCell() {

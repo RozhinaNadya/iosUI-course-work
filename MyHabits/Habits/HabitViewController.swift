@@ -26,14 +26,14 @@ class HabitViewController: UIViewController {
     let titleHabitLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.text = "НАЗВАНИЕ"
+        label.text = "TITLE"
         label.font = .footnoteFont
         return label
     }()
     
     let titleHabitTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Бегать по утрам, спать 8 часов и т.п."
+        textField.placeholder = "Run in the morning, sleep 8 hours, etc."
         textField.textColor = .blue
         textField.font = .bodyFont
         textField.toAutoLayout()
@@ -43,7 +43,7 @@ class HabitViewController: UIViewController {
     let colorHabitLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.text = "ЦВЕТ"
+        label.text = "COLOR"
         label.font = .footnoteFont
         return label
     }()
@@ -60,7 +60,7 @@ class HabitViewController: UIViewController {
     let timeHabitLabel: UILabel = {
         let label = UILabel()
         label.toAutoLayout()
-        label.text = "ВРЕМЯ"
+        label.text = "TIME"
         label.font = .footnoteFont
         return label
     }()
@@ -70,7 +70,7 @@ class HabitViewController: UIViewController {
         label.toAutoLayout()
         label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.numberOfLines = 0
-        label.text = "Каждый день в "
+        label.text = "Every day in "
         label.font = .bodyFont
         return label
     }()
@@ -96,7 +96,7 @@ class HabitViewController: UIViewController {
     let deleteHabitButton: UIButton = {
         let button = UIButton()
         button.toAutoLayout()
-        button.setTitle("Удалить привычку", for: .normal)
+        button.setTitle("Delete Habit", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.titleLabel?.font = .bodyFont
         button.addTarget(self, action: #selector(deleteHabit), for: .touchUpInside)
@@ -128,8 +128,8 @@ class HabitViewController: UIViewController {
         txtDatePicker.inputView = datePicker
         datePicker.datePickerMode = .time
         getDateFromPicker()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(cancelHabit))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(safeHabit))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelHabit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(safeHabit))
     }
     
     @objc func getDateFromPicker() {
@@ -161,7 +161,6 @@ class HabitViewController: UIViewController {
     }
     
     @objc func cancelHabit() {
-        print("close close close")
         self.dismiss(animated: true, completion: nil)
         navigationController?.popToRootViewController(animated: true)
     }
@@ -189,9 +188,9 @@ class HabitViewController: UIViewController {
     
     @objc func deleteHabit() {
         print("delete delete")
-        let alert = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку \(titleHabitTextField.text ?? "No title")?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: "Удалить", style: .default, handler: {alert -> Void in
+        let alert = UIAlertController(title: "Delete habit", message: "Do you want delete habit '\(titleHabitTextField.text ?? "No title")'?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {alert -> Void in
             HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.habit!)!)
             HabitsStore.shared.save()
             self.delegateDetails?.close()

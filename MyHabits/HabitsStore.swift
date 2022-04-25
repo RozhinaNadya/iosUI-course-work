@@ -39,7 +39,7 @@ public final class Habit: Codable {
     
     /// Описание времени выполнения привычки.
     public var dateString: String {
-        "Каждый день в " + dateFormatter.string(from: date)
+        "Every day in " + dateFormatter.string(from: date)
     }
     
     /// Показывает, была ли сегодня добавлена привычка.
@@ -149,7 +149,7 @@ public final class HabitsStore {
             userDefaults.setValue(data, forKey: "habits")
         }
         catch {
-            print("Ошибка кодирования привычек для сохранения", error)
+            print("Error encoding habits to save", error)
         }
     }
     
@@ -194,7 +194,7 @@ public final class HabitsStore {
             habits = try decoder.decode([Habit].self, from: data)
         }
         catch {
-            print("Ошибка декодирования сохранённых привычек", error)
+            print("Stored Habits Decoding Error", error)
         }
     }
 }

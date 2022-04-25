@@ -19,7 +19,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate{
     
     let titleInfoHabitsLabel: UILabel = {
         let title = UILabel()
-        title.text = "Привычка за 21 день"
+        title.text = "Habit in 21 days"
         title.font = .titleFont
         title.toAutoLayout()
         return title
@@ -27,7 +27,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate{
     
     let textInfoHabitsLabel: UILabel = {
         let textInfo = UILabel()
-        textInfo.text = "Прохождение этапов, за которые за 21 день вырабатывается привычка, подчиняется следующему алгоритму: \n\n1. Провести 1 день без обращения к старым привычкам, стараться вести себя так, как будто цель, загаданная в перспективу, находится на расстоянии шага. \n\n2. Выдержать 2 дня в прежнем состоянии самоконтроля. \n\n3. Отметить в дневнике первую неделю изменений и подвести первые итоги — что оказалось тяжело, что — легче,с чем еще предстоит серьезно бороться. \n\n4. Поздравить себя с прохождением первого серьезного порога в 21 день. За это время отказ от дурных наклонностей уже примет форму осознанного преодоления и человек сможет больше работать в сторону принятия положительных качеств. \n\n5. Держать планку 40 дней. Практикующий методику уже чувствует себя освободившимся от прошлого негатива и двигается в нужном направлении с хорошей динамикой. \n\n6. На 90-й день соблюдения техники все лишнее из «прошлой жизни» перестает напоминать о себе, и человек, оглянувшись назад, осознает себя полностью обновившимся."
+        textInfo.text = "The passage of stages for which a habit is developed in 21 days is subject to the following algorithm: \n\n1. Spend 1 day without revisiting old habits, trying to act as if the goal, put into perspective, is just a step away. \n\n2. Maintain 2 days in the same state of self-control. \n\n3. To mark in the diary the first week of changes and sum up the first results - what turned out to be hard, what was easier, what still needs to be seriously fought. \n\n4. Congratulate yourself on passing your first major threshold at 21 days. During this time, the rejection of bad inclinations will already take the form of a conscious overcoming and a person will be able to work more towards the adoption of positive qualities. \n\n5. Hold the plank for 40 days. The practitioner of the technique already feels freed from past negativity and is moving in the right direction with good dynamics. \n\n6. On the 90th day of observing the technique, everything superfluous from the “past life” ceases to remind of itself, and a person, looking back, realizes that he is completely renewed."
         textInfo.font = .bodyFont
         textInfo.numberOfLines = 0
         textInfo.toAutoLayout()
@@ -36,7 +36,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate{
     
     let footnoteInfoHabitsLabel: UILabel = {
         let footnote = UILabel()
-        footnote.text = "Источник: psychbook.ru"
+        footnote.text = "Source: psychbook.ru"
         footnote.font = .bodyFont
         footnote.toAutoLayout()
         return footnote

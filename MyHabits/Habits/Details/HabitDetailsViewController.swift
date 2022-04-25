@@ -15,7 +15,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     let cellDetails = "DetailsTableViewCell"
     
-    let editHabitVC = HabitViewController(color: .white, title: "Править")
+    let editHabitVC = HabitViewController(color: .white, title: "Edit")
     
     var detailsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -38,7 +38,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         constraintsDetailsViewContriller()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Править", style: .plain, target: self, action: #selector(doEditHabit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Correct", style: .plain, target: self, action: #selector(doEditHabit))
         editHabitVC.delegateDetails = self
     }
     
@@ -80,7 +80,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "АКТИВНОСТЬ"
+        "ACTIVITY"
     }
 }
 
