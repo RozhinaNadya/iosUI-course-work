@@ -66,8 +66,8 @@ class HabitCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func didTapImageView() {
-        print("tap buttonColor")
-        habitForTap!.isAlreadyTakenToday ? nil : HabitsStore.shared.track(habitForTap!)
+        guard let tapHabit = habitForTap else { return }
+        tapHabit.isAlreadyTakenToday ? nil : HabitsStore.shared.track(tapHabit)
         delegat?.reloadCollectionView()
     }
     

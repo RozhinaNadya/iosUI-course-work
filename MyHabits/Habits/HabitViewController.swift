@@ -190,11 +190,13 @@ class HabitViewController: UIViewController {
     }
     
     @objc func deleteHabit() {
-        print("delete delete")
-        let alert = UIAlertController(title: "Delete habit", message: "Do you want delete habit '\(titleHabitTextField.text ?? "No title")'?", preferredStyle: .alert)
+        guard let titleHabitTextFieldForDelete = titleHabitTextField.text else { return }
+        guard let habitForDelete = self.habit else { return }
+        let alert = UIAlertController(title: "Delete habit", message: "Do you want delete habit '\(titleHabitTextFieldForDelete)'?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: {alert -> Void in
-            HabitsStore.shared.habits.remove(at: HabitsStore.shared.habits.firstIndex(of: self.habit!)!)
+            guard let indexHabitForDelete = HabitsStore.shared.habits.firstIndex(of: habitForDelete) else { return }
+            HabitsStore.shared.habits.remove(at: indexHabitForDelete)
             HabitsStore.shared.save()
             self.delegateDetails?.close()
             self.dismiss(animated: true, completion: nil)

@@ -8,16 +8,13 @@
 import UIKit
 
 class HabitsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
-    
-    var backgroundColor: UIColor = UIColor(named: "allBackgroundColor")!
-    
+        
     let newHabitVC = HabitViewController(color: .white, title: "Create")
     
     var detailsViewController: HabitDetailsViewController?
             
     let habitsCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-        collectionView.backgroundColor = UIColor(named: "allBackgroundColor")
         collectionView.toAutoLayout()
         return collectionView
     }()
@@ -25,15 +22,17 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
     let cellHabit = "HebitCollectionViewCell"
     let cellProgress = "ProgressCollectionViewCell"
     
-    init( color: UIColor) {
+    init(title: String) {
         super.init(nibName: nil, bundle: nil)
-        backgroundColor = color
+        self.view.backgroundColor = .allBackgroundColor
+        habitsCollectionView.backgroundColor = .allBackgroundColor
+        self.title = title
     }
     
     override func loadView() {
         let view = UIView()
         self.view = view
-        view.backgroundColor = backgroundColor
+        view.backgroundColor = .allBackgroundColor
     }
     
     override func viewDidLoad() {
@@ -44,8 +43,7 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         habitsCollectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: cellProgress)
         habitsCollectionView.dataSource = self
         habitsCollectionView.delegate = self
-        self.view.backgroundColor = UIColor(named: "allBackgroundColor")!
-        self.navigationItem.title = "Today"
+ //       self.navigationItem.title = "Today"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         newHabitVC.delegate = self
     }
@@ -96,7 +94,7 @@ extension HabitsViewController {
             let myHabit = HabitsStore.shared.habits[indexPath.item]
             cell.habitNameLabel.text = "\(myHabit.name)"
             cell.targetTimeLabel.text = "\(myHabit.dateString)"
-            cell.timerLabel.text = "Count tracker: \(myHabit.trackDates.count)"
+            cell.timerLabel.text = "Tracker: \(myHabit.trackDates.count)"
             cell.checkPointImageView.tintColor = myHabit.color
             cell.habitNameLabel.textColor = myHabit.color
             cell.habitForTap = myHabit
@@ -107,9 +105,15 @@ extension HabitsViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
         detailsViewController = HabitDetailsViewController(title: HabitsStore.shared.habits[indexPath.item].name, habitForEdit: HabitsStore.shared.habits[indexPath.item])
         detailsViewController?.delegate = self
-        navigationController?.pushViewController(detailsViewController!, animated: true)
+            navigationController?.pushViewController(detailsViewController!, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Your progress", message: "Mark the habit and monitor your progress", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            return self.present(alert, animated: true, completion: nil)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,

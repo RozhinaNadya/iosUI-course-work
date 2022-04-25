@@ -44,7 +44,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         constraintsProgressViewCell()
-        contentView.backgroundColor = UIColor(named: "allBackgroundColor")
+        contentView.backgroundColor = .allBackgroundColor
     }
     
        func progressText() {

@@ -38,7 +38,7 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
         constraintsDetailsViewContriller()
         self.view.backgroundColor = .white
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Correct", style: .plain, target: self, action: #selector(doEditHabit))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(doEditHabit))
         editHabitVC.delegateDetails = self
     }
     
@@ -70,7 +70,8 @@ class HabitDetailsViewController: UIViewController, UITableViewDataSource, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellDetails, for: indexPath) as? HabitDetailsTableViewCell else { fatalError() }
-        cell.dayLabel.text = "\(HabitsStore.shared.trackDateString(forIndex: indexPath.row)!)"
+        let indexHabit = indexPath.row
+        cell.dayLabel.text = "\(String(describing: HabitsStore.shared.trackDateString(forIndex: indexHabit)))"
         if HabitsStore.shared.habit(habitForEdit, isTrackedIn: HabitsStore.shared.dates[indexPath.item]) {
             cell.checkImageView.isHidden = false
         } else {

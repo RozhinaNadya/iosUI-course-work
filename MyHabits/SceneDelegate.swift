@@ -17,8 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
-        let habitsNavigationController = UINavigationController(rootViewController: HabitsViewController(color: UIColor(named: "allBackgroundColor")!))
-        let infoNavigationController = UINavigationController(rootViewController: InfoViewController(color: .white, title: "Info"))
+        let habitsNavigationController = UINavigationController(rootViewController: HabitsViewController(title: "Today"))
+        let infoNavigationController = UINavigationController(rootViewController: InfoViewController(title: "Info"))
         
         habitsNavigationController.tabBarItem = UITabBarItem(title: "Habits", image: UIImage(systemName: "rectangle.grid.1x2.fill"), selectedImage: nil)
         infoNavigationController.tabBarItem = UITabBarItem(title: "Info", image: UIImage(systemName: "info.circle.fill"), selectedImage: nil)

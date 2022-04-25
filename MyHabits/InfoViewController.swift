@@ -8,9 +8,7 @@
 import UIKit
 
 class InfoViewController: UIViewController, UIScrollViewDelegate{
-    
-    var backgroundColor: UIColor = .white
-    
+        
     let infoScrollView: UIScrollView = {
         let scroll = UIScrollView()
         scroll.toAutoLayout()
@@ -42,16 +40,16 @@ class InfoViewController: UIViewController, UIScrollViewDelegate{
         return footnote
     }()
     
-    init( color: UIColor, title: String = "Title") {
+    init(title: String) {
         super.init(nibName: nil, bundle: nil)
-        backgroundColor = color
+        self.view.backgroundColor = .white
         self.title = title
     }
     
     override func loadView() {
         let view = UIView()
         self.view = view
-        view.backgroundColor = backgroundColor
+        view.backgroundColor = .white
     }
     
     override func viewDidLoad() {
