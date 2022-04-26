@@ -167,9 +167,7 @@ class HabitViewController: UIViewController {
     @objc func safeHabit() {
         
         guard let habitNewName = self.titleHabitTextField.text, !habitNewName.isEmpty else {
-            let alert = UIAlertController(title: "No Title", message: "You can't save a habit without a title", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alert, animated: true, completion: nil)
+            return self.present(UIAlertController.noTittleAlert, animated: true, completion: nil)
         }
         
         if let habit = self.habit, let indexHabit = HabitsStore.shared.habits.firstIndex(of: habit) {

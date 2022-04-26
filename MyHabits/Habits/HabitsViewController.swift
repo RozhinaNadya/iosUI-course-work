@@ -43,7 +43,6 @@ class HabitsViewController: UIViewController, UICollectionViewDataSource, UIColl
         habitsCollectionView.register(ProgressCollectionViewCell.self, forCellWithReuseIdentifier: cellProgress)
         habitsCollectionView.dataSource = self
         habitsCollectionView.delegate = self
- //       self.navigationItem.title = "Today"
         self.navigationController?.navigationBar.prefersLargeTitles = true
         newHabitVC.delegate = self
     }
@@ -110,9 +109,7 @@ extension HabitsViewController {
         detailsViewController?.delegate = self
             navigationController?.pushViewController(detailsViewController!, animated: true)
         } else {
-            let alert = UIAlertController(title: "Your progress", message: "Mark the habit and monitor your progress", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            return self.present(alert, animated: true, completion: nil)
+            return self.present(UIAlertController.yourProgressAlert, animated: true, completion: nil)
         }
     }
     
