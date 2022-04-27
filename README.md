@@ -1,5 +1,9 @@
 # My Habits
 
+Here you can see screen shots of App and instruments which were used in this project.
+
+### Project overview
+
 Good habit tracker. 
 
 You can add a new habit and than track it. You need only 21 days for habit will become a part of your life.
@@ -31,7 +35,29 @@ Look at details of yor habit. You can see what days was with the habit and what 
     <img width="30%" src="/MyHabits/Assets.xcassets/DetailsHabit.png">
     <img width="30%" src="/MyHabits/Assets.xcassets/DeleteHabit.png">
   </p>
+  
+ App is adaptive. You can choose the most convenient interface Orientation for you.
+ 
+ 
+  <p align="center" width="100%"> 
+    <img width="75%" src="/MyHabits/Assets.xcassets/Orientation.png">
+  </p>
 
-This project is cours work in [Netology](https://netology.ru/).
+### Instruments overview
+
+The following tools were used in this project:
+- coding without storyboard;
+- **UICollectionView** to header for create main screen with habist;
+- **UITableView** to create details screen with checkmarks days;
+- **UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate** to communicate between controllers, update data in real time and navigation; 
+- **UIAlertController** to notify the user about an action or impossibility of action;
+- **NSLayoutConstraint** to screen layout;
+- **UIColorPickerViewControllerDelegate** to create a color for a checkmark and for a title;
+- **UITapGestureRecognizer** to choose color on the button;
+- **UIProgressView** to show the progress of doing habits.
+
+**HabitsStore.swift** – this file was received along with the task.
 
 You can see the task [here](https://github.com/netology-code/iosui-diplom/blob/main/README.md).
+
+*This project is cours work in [Netology](https://netology.ru/).*
