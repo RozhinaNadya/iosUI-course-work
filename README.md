@@ -17,11 +17,18 @@ Mark the habit and monitor your progress. Get better!
     <img width="30%" src="/MyHabits/Assets.xcassets/HabitsWithCheckmark.png"> 
   </p>
 
-Add a new habit at any time. Choose color and time. Don't forget a title! You can't save a habit without a name. Also if you want, you can edid or delete your habit. 
+Add a new habit at any time. Choose color and time. Don't forget a title! You can't save a habit without a name.
 
   <p align="center" width="100%"> 
-    <img width="30%" src="/MyHabits/Assets.xcassets/CreateHabit.png"> 
-    <img width="30%" src="/MyHabits/Assets.xcassets/noTitle.png"> 
+    <img width="30%" src="/MyHabits/Assets.xcassets/CreateHabit.png">  
+    <img width="30%" src="/MyHabits/Assets.xcassets/Color.png">
+    <img width="30%" src="/MyHabits/Assets.xcassets/noTitle.png">
+  </p>
+  
+Look at details of yor habit. You can see what days was with the habit and what days was without it. Also if you want, you can edid or delete your habit. 
+
+  <p align="center" width="100%"> 
+    <img width="30%" src="/MyHabits/Assets.xcassets/DetailsHabit.png">
     <img width="30%" src="/MyHabits/Assets.xcassets/DeleteHabit.png">
   </p>
 
