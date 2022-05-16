@@ -6,7 +6,7 @@ Here you can see screen shots of App and instruments which were used in this pro
 
 Good habit tracker. 
 
-You can add a new habit and than track it. You need only 21 days for habit will become a part of your life.
+You can add a new habit and than track it. You need only 21 days for a habit to become a part of your life.
 
   <p align="center" width="100%">
     <img width="30%" src="/MyHabits/Assets.xcassets/LaunchScreen.png"> 
@@ -29,14 +29,14 @@ Add a new habit at any time. Choose color and time. Don't forget a title! You ca
     <img width="30%" src="/MyHabits/Assets.xcassets/noTitle.png">
   </p>
   
-Look at details of yor habit. You can see what days was with the habit and what days was without it. Also if you want, you can edid or delete your habit. 
+Look at the details for your habit. You can see what days were with the habit and what days were without it. Also if you want, you can edit or delete your habit. 
 
   <p align="center" width="100%"> 
     <img width="30%" src="/MyHabits/Assets.xcassets/DetailsHabit.png">
     <img width="30%" src="/MyHabits/Assets.xcassets/DeleteHabit.png">
   </p>
   
- App is adaptive. You can choose the most convenient interface Orientation for you.
+The app is adaptive. You can choose the most convenient interface Orientation for you.
  
  
   <p align="center" width="100%"> 
@@ -51,7 +51,7 @@ The following tools were used in this project:
 - **UITableView** to create details screen with checkmarks days;
 - **UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate** to communicate between controllers, update data in real time and navigation; 
 - **UIAlertController** to notify the user about an action or impossibility of action;
-- **NSLayoutConstraint** to screen layout;
+- **NSLayoutConstraint** for screen layout;
 - **UIColorPickerViewControllerDelegate** to create a color for a checkmark and for a title;
 - **UITapGestureRecognizer** to choose color on the button;
 - **UIProgressView** to show the progress of doing habits.
